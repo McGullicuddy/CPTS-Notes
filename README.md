@@ -5,8 +5,6 @@ Notes from my CPTS "Penetration Tester" Path
 
 # Module 1: Penetration Testing Process
 
-<br/>
-
 ### Stages of a Penetration Test 
 | Stage    | Description |
 | -------- | ------- |
@@ -46,12 +44,12 @@ Notes from my CPTS "Penetration Tester" Path
 
 # Getting Started
 
-<br/>
+### Common Tools 
 
-### Common Terms
-| Term | Definition |
-| -------- | ------- |
-| a | b |
+1. **Netcat**: Banner Grabbing (netcat [ip] 22), might return the services banner and give us some information on that specific service. PowerCat is the Windows version. Also be used to transfer files.
+2. **Socat**: Like Netcat, but provides some other features.
+3. **Vi/Vim:** Cheat Sheet: https://vimsheet.com/
+
 
 
 
