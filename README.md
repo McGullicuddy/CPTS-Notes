@@ -20,11 +20,14 @@ Notes from my CPTS "Penetration Tester" Path
 <br/>
 
 ### Laws and Regulations
-1.  **Computer Fraud and Abuse Act (CFAA)**: Federal law that makes it a criminal offense to access a computer without authorization
-2.  **Digital Millennium Copyright Act (DMCA)**: Includes provisions prohibiting circumventing technological measures to protect copyrighted works
-3.  **Electronic Communications Privacy Act (ECPA)**: Regulates the interception of electronic communications, including those sent over the Internet
-4.  **Health Insurance Portability and Accountability Act (HIPAA)**: Governs the use and disclosure of protected health information and includes a set of rules for safeguarding personal health information stored electronically
-5.  Children's Online Privacy Protection Act (COPPA): Important piece of legislation regulating the collection of personal information from children under 13
+| L/R    | Description |
+| -------- | ------- |
+|  Computer Fraud and Abuse Act (CFAA) | Federal law that makes it a criminal offense to access a computer without authorization |
+| Digital Millennium Copyright Act (DMCA) | Includes provisions prohibiting circumventing technological measures to protect copyrighted works |
+| Electronic Communications Privacy Act (ECPA) | Regulates the interception of electronic communications, including those sent over the Internet |
+| Health Insurance Portability and Accountability Act (HIPAA) | Governs the use and disclosure of protected health information and includes a set of rules for safeguarding personal health information stored electronically |
+| Children's Online Privacy Protection Act (COPPA) | Important piece of legislation regulating the collection of personal information from children under 13 |
+
 
 <br/>
 
@@ -45,12 +48,19 @@ Notes from my CPTS "Penetration Tester" Path
 # Getting Started
 
 ### Common Tools 
+| L/R    | Description |
+| -------- | ------- |
+| Netcat | Banner Grabbing (netcat [ip] 22), might return the services banner and give us some information on that specific service. PowerCat is the Windows version. Also be used to transfer files. |
+| Socat | Like Netcat, but provides some other features. |
+| Vi/Vim | Cheat Sheet: https://vimsheet.com/ |
 
-1. **Netcat**: Banner Grabbing (netcat [ip] 22), might return the services banner and give us some information on that specific service. PowerCat is the Windows version. Also be used to transfer files.
-2. **Socat**: Like Netcat, but provides some other features.
-3. **Vi/Vim:** Cheat Sheet: https://vimsheet.com/
+### Scanning 
 
-
+**Nmap:** <br><br>
+Basic NMAP Scan
+```
+nmap [ip]
+```
 
 
 
