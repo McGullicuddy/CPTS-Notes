@@ -87,7 +87,7 @@ Banner Grab with Nmap
 ```
 nmap -sV --script=banner <target>
 ```
-
+smbclient -U bob \\\\10.129.42.253\\users
 Banner Grab with Netcat
 ```
 nc -nv 10.129.42.253 21
@@ -104,3 +104,11 @@ Nmap script to enumerate SMB (Server Message Block)
 nmap --script smb-os-discovery.nse -p445 10.10.10.40
 ```
 
+SMB Shares
+```
+smbclient -N -L \\\\10.129.42.253
+
+smbclient \\\\10.129.42.253\\users
+
+smbclient -U bob \\\\10.129.42.253\\users
+```
