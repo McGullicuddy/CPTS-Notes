@@ -91,6 +91,16 @@ nmap -sV --script=banner <target>
 Banner Grab with Netcat
 ```
 nc -nv 10.129.42.253 21
+
 ```
 
+Same Banner Grab but with Nmap
+```
+nmap -sV --script=banner -p21 [ip]
+```
+
+Nmap script to enumerate SMB (Server Message Block)
+```
+nmap --script smb-os-discovery.nse -p445 10.10.10.40
+```
 
