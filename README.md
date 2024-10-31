@@ -54,6 +54,8 @@ Notes from my CPTS "Penetration Tester" Path
 | Socat | Like Netcat, but provides some other features. |
 | Vi/Vim | Cheat Sheet: https://vimsheet.com/ |
 
+<br>
+
 ### Scanning 
 
 **Nmap:** <br><br>
@@ -62,5 +64,33 @@ Basic NMAP Scan
 nmap [ip]
 ```
 
+You can use the **-sC** flag to tell nmap to use scripts in order to gather more information. The **-sV** flag will retrieve service versions. You can use **-p** to specify what ports you want to scan and **-p-** to scan all 65535 ports. 
+```
+nmap -sV -sC -p- [ip]
+```
+
+NMAP scripts located here
+```
+/usr/share/nmap/scripts/
+```
+
+Once you have the script you need. The following command will execute it against the target.
+```
+nmap --script <script name> -p<port> <host>
+```
+
+<br>
+
+### Banner Grabbing 
+
+Banner Grab with Nmap
+```
+nmap -sV --script=banner <target>
+```
+
+Banner Grab with Netcat
+```
+nc -nv 10.129.42.253 21
+```
 
 
