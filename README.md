@@ -116,4 +116,8 @@ smbclient -U bob \\\\[ip]\\users
 <br>
 
 ### Web Enumeration
-
+Tools such as Gobuster and ffuf can be used to enumerate webserver directories. Gobuster can specifically be used to bruteforce DNS, vHost, and directories. \
+The following command uses the **common.txt** dictionary file to brute force a webservers common directory names.
+```
+gobuster dir -u http://[ip]/ -w /usr/share/seclists/Discovery/Web-Content/common.txt
+```
