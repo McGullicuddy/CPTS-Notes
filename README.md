@@ -104,11 +104,16 @@ Nmap script to enumerate SMB (Server Message Block)
 nmap --script smb-os-discovery.nse -p445 10.10.10.40
 ```
 
-SMB Shares
+SMB Shares (List shares with **-L**, Login wiht **-U**)
 ```
-smbclient -N -L \\\\10.129.42.253
+smbclient -N -L \\\\[ip]
 
-smbclient \\\\10.129.42.253\\users
+smbclient \\\\[ip]\\users
 
-smbclient -U bob \\\\10.129.42.253\\users
+smbclient -U bob \\\\[ip]\\users
 ```
+
+<br>
+
+### Web Enumeration
+
