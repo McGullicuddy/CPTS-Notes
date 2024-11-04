@@ -121,3 +121,21 @@ The following command uses the **common.txt** dictionary file to brute force a w
 ```
 gobuster dir -u http://[ip]/ -w /usr/share/seclists/Discovery/Web-Content/common.txt
 ```
+You can use cURL to retrieve server header information. You can also use a tool called "EyeWitness" which can identify default creds for web apps. 
+```
+curl -IL https://[ip]
+```
+Whatweb will find version of web servers, supporting frameworks, and applications
+```
+whatweb [ip]
+
+or
+
+whatweb --no-errors [ip]
+```
+Viewing a websites certificates can be a good source of information. And Robots.txt can provide some valuable insight into what the owners do not want publically indexable. 
+
+
+
+
+
