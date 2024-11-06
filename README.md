@@ -135,6 +135,28 @@ whatweb --no-errors [ip]
 ```
 Viewing a websites certificates can be a good source of information. And Robots.txt can provide some valuable insight into what the owners do not want publically indexable. 
 
+<br>
+
+### Types of Shells 
+| Type of Shell | Method of Communication |
+|---------------| -----------------------|
+|Reverse Shell 	|Connects back to our system and gives us control through a reverse connection.|
+|Bind Shell 	|Waits for us to connect to it and gives us control once we do.|
+|Web Shell 	|Communicates through a web server, accepts our commands through HTTP parameters, executes them, and prints back the output.|
+
+For a reverse shell you can start a netcat listener that will sit on your system can wait for a call from the victim
+```
+netcat -lvnp [port number]
+```
+This website contains a list of "Reverse Shell Commands" that you can use: https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/
+
+You can upgrade your "TTY" when you first gain access to the remote shell using:
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+There are many ways to do this, do the research. 
+
+
 
 
 
