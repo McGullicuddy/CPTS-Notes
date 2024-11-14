@@ -156,6 +156,21 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 ```
 There are many ways to do this, do the research. <br>
 
+To elevate your tty session:
+```
+# import /bin/bash
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+# If python cannot be found, use Which to find where python is located
+which python3
+
+# Hit ctrl + z to background your session
+
+# Run the following commands to upgrade your session and then forground the session
+stty raw -echo
+fg
+```
+
 <br>
 
 ### Transferring files 
