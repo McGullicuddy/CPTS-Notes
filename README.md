@@ -154,7 +154,7 @@ You can upgrade your "TTY" when you first gain access to the remote shell using:
 ```
 python -c 'import pty; pty.spawn("/bin/bash")'
 ```
-There are many ways to do this, do the research. 
+There are many ways to do this, do the research. <br>
 
 <br>
 
