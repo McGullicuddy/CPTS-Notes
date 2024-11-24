@@ -170,6 +170,16 @@ which python3
 stty raw -echo
 fg
 ```
+<br>
+
+### Priv Esc
+**Research Resources:**
+1. HackTricks (Checklist for Windows and Linux): https://book.hacktricks.xyz/ 
+2. PayloadsAllTheThings: https://github.com/swisskyrepo/PayloadsAllTheThings
+3. Ennum Script: https://github.com/sleventyeleven/linuxprivchecker
+4. Suit of Enum Scripts: https://github.com/peass-ng/PEASS-ng
+5. GTFOBins (Exploit sudo permissions): https://gtfobins.github.io/
+6. LOLBAS (Exploit windows permissions): https://lolbas-project.github.io/#
 
 <br>
 
