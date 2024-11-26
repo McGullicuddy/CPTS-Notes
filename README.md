@@ -200,7 +200,33 @@ If you happen to obtain the ssh creds of a box, you can use SCP
 ```
 scp [file you want to transfer] user@remotehost:/tmp/linenum.sh
 ```
-
 **Note:** If a firewall is stopping the transfer of some files, you can try encoding the file in base64, copy and pasting it over to the remote machine, and then decoding it there. 
+
+
+<br>
+
+# Module 2: NMAP
+
+### Host Discovery
+
+nmap one liner to discover  active hosts in a subnet
+```
+sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5
+
+# -sn specifies to not scan ports
+# -oA ouputs the file in 3 mjaor formats you can use just -o here. This important as we can later use this list of hosts to run a scan later on
+# You can specify an IP range by using this syntax (10.129.2.18-20) or specify multiple IPs by just listing them out 
+# This scanning tech uses ping, and will only work if the firewalls infront of the network allow for pings
+# Use the --packet-trace to track packets and the -PE flag to ensure that the ping requests are sent.
+# --reason will display the reason for that result
+# --disable-arp-ping
+```
+
+### Hosts and Port Scanning
+
+1. By default nmap scans the top 1000 ports using the SYN scan "-sS" (SYN scan is only default when nmap is run as root due to socket permissions). When run without root the "-sT" TCP scan is the default.
+2. "--top-ports" will scan the 10 most commonly used ports
+
+If you are 
 
 
