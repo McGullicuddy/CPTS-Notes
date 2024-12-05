@@ -217,16 +217,29 @@ sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5
 # -oA ouputs the file in 3 mjaor formats you can use just -o here. This important as we can later use this list of hosts to run a scan later on
 # You can specify an IP range by using this syntax (10.129.2.18-20) or specify multiple IPs by just listing them out 
 # This scanning tech uses ping, and will only work if the firewalls infront of the network allow for pings
-# Use the --packet-trace to track packets and the -PE flag to ensure that the ping requests are sent.
+# Use the --packet-trace to show all packets and the -PE flag to ensure that the ping requests are sent.
 # --reason will display the reason for that result
 # --disable-arp-ping
+# -n to disable dns resolution
 ```
+**Note:** Linux typically has a ttl aroudn 64 and Windows around 128 
+
+<br>
 
 ### Hosts and Port Scanning
 
 1. By default nmap scans the top 1000 ports using the SYN scan "-sS" (SYN scan is only default when nmap is run as root due to socket permissions). When run without root the "-sT" TCP scan is the default.
 2. "--top-ports" will scan the 10 most commonly used ports
 
-If you are 
+**Trace Packets**
+```
+sudo nmap 10.129.2.28 -p 21 --packet-trace -Pn -n --disable-arp-ping
+```
+
+**TCP Connect Scan:** Use the -sT flag to envoke a full TCP handshake against a port to see if it is open or not. Port is open if the scan receives a SYN-ACK and closed if it receives a RST. This scan is very loud, but also a good option when accuracy is the goal or when the situation calls for a more polite and mutal scan of the network, as to not disrupt or destroy and services. 
+
+**SYN Scan:** The SYN scan is more stealthy as it does not complete a full handshake and will be less likely to trigger log collection.
+
+
 
 
