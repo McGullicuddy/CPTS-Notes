@@ -231,15 +231,73 @@ sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5
 1. By default nmap scans the top 1000 ports using the SYN scan "-sS" (SYN scan is only default when nmap is run as root due to socket permissions). When run without root the "-sT" TCP scan is the default.
 2. "--top-ports" will scan the 10 most commonly used ports
 
+**Check for OPEN TCP ports**
+```
+sudo nmap --open -p- host -T5
+# T5 make go brooooooom
+```
+
 **Trace Packets**
 ```
-sudo nmap 10.129.2.28 -p 21 --packet-trace -Pn -n --disable-arp-ping
+sudo nmap host -p 21 --packet-trace -Pn -n --disable-arp-ping
 ```
 
 **TCP Connect Scan:** Use the -sT flag to envoke a full TCP handshake against a port to see if it is open or not. Port is open if the scan receives a SYN-ACK and closed if it receives a RST. This scan is very loud, but also a good option when accuracy is the goal or when the situation calls for a more polite and mutal scan of the network, as to not disrupt or destroy and services. 
 
 **SYN Scan:** The SYN scan is more stealthy as it does not complete a full handshake and will be less likely to trigger log collection.
 
+**Discover UDP Ports**
+```
+sudo nmap host -F -sU
+
+# -sU for UDP ports
+# -F for top 100 ports
+# Due to nmap only sending out empty datagrams to the select UDP ports we will likely not get any responses
+
+sudo nmap host -sU -Pn -n --disable-arp-ping --packet-trace -p 100 --reason 
+```
+
+**-sV:** Get additonal available information about the service running on open ports 
+
+<br>
 
 
+### Saving the Results
 
+**Types of ouput formats:**
+```
+-oN == normal output
+
+-oG == grepable format
+
+-oX == XML format
+
+-oA == all formats at once
+
+
+Convert XML format to HTML to view in your browser for an easy to read summary
+$ xsltproc target.xml -o target.html
+```
+
+<br>
+
+
+### Service Enumeration 
+
+**Full Port Scan**
+```
+sudo nmap host -p- -sV
+
+# Full range port scans can take some time, user SPACE BAR to have nmap show you the progress of the scan  
+# You can also use the option --stat-every=5s to have nmap update you in intervals
+```
+
+
+### Scripting
+
+**Scan Example**
+```
+sudo nmap 10.129.2.28 -p 80 -sV --script vuln
+
+# https://nmap.org/nsedoc/scripts/
+```
