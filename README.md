@@ -342,13 +342,29 @@ Exact figure can be found here: https://nmap.org/book/performance-timing-templat
 
 ** -sA v -sS:** sA can make it harder for firewalls and IDS/IPS to detect scans since it only sends ACK flags. Since the firewall cannot determine where the packet was created, it allows it through. 
 
-\
+<br>
 
 **Decoy and RND**
 ```
-sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+sudo nmap [ip] -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
 
 # -D has nmap generate random IP addresses and insert them into the packet header. These packets are sent along side your ip and make it hard for the router to detemine what to block.
 
 # RND specify the number of address to generate (Your ip will have an index from 0-4)
+```
+
+**Testing firewall rule and OS Detection **
+```
+sudo nmap [ip] -n -Pn -p445 -O
+
+sudo nmap [ip] -n -Pn -p 445 -O -S [ip] -e tun0
+```
+
+**DNS Proxying:** 
+```
+--dns-server
+# Specify DNS servers with
+
+--source-port
+# Specify source port
 ```
