@@ -292,6 +292,7 @@ sudo nmap host -p- -sV
 # You can also use the option --stat-every=5s to have nmap update you in intervals
 ```
 
+<br>
 
 ### Scripting
 
@@ -300,4 +301,54 @@ sudo nmap host -p- -sV
 sudo nmap 10.129.2.28 -p 80 -sV --script vuln
 
 # https://nmap.org/nsedoc/scripts/
+```
+
+
+<br>
+
+### Scanning Performance
+
+**Timeouts:** Set the time that nmap will wait until it receives a response from the target. Smaller numbers will speed up your scan. Default value is 100ms.
+```
+--min-RTT-timeout
+```
+\
+**Retry Rate:** Set number of times nmap will try to resend a packet.
+```
+--max-retries 0
+```
+\
+**Rate:** Specify the amount of packets to send at a time. Useful when you have permission and know the bandwidth / dont care about the target...
+```
+--min-rate 300
+```
+\
+**Timing:** Specify how agressive you want the scan to be. There are presets for all of the other settings.  
+```
+-T 0 / -T paranoid
+-T 1 / -T sneaky
+-T 2 / -T polite
+-T 3 / -T normal
+-T 4 / -T aggressive
+-T 5 / -T insane
+
+Exact figure can be found here: https://nmap.org/book/performance-timing-templates.html
+```
+
+
+<br>
+
+### Firewall IDS IPS Evasion
+
+** -sA v -sS:** sA can make it harder for firewalls and IDS/IPS to detect scans since it only sends ACK flags. Since the firewall cannot determine where the packet was created, it allows it through. 
+
+\
+
+**Decoy and RND**
+```
+sudo nmap 10.129.2.28 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+
+# -D has nmap generate random IP addresses and insert them into the packet header. These packets are sent along side your ip and make it hard for the router to detemine what to block.
+
+# RND specify the number of address to generate (Your ip will have an index from 0-4)
 ```
