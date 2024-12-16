@@ -322,7 +322,9 @@ sudo nmap 10.129.2.28 -p 80 -sV --script vuln
 ```
 --min-rate 300
 ```
+
 \
+
 **Timing:** Specify how agressive you want the scan to be. There are presets for all of the other settings.  
 ```
 -T 0 / -T paranoid
@@ -353,7 +355,7 @@ sudo nmap [ip] -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
 # RND specify the number of address to generate (Your ip will have an index from 0-4)
 ```
 
-**Testing firewall rule and OS Detection **
+**Testing firewall rule and OS Detection:**
 ```
 sudo nmap [ip] -n -Pn -p445 -O
 
