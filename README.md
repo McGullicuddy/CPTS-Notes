@@ -1,10 +1,10 @@
 # CPTS-Notes
 Notes from my CPTS "Penetration Tester" Path
-
+Domain Information
 <br/><br/><br/><br/>
 
 # Module 1: Penetration Testing Process
-
+Domain Information
 ### Stages of a Penetration Test 
 | Stage    | Description |
 | -------- | ------- |
@@ -380,6 +380,11 @@ sudo nmap [ip] -n -Pn -p 445 -O -S [ip] -e tun0
 ### Enumeration Principles
 
 ![enum-method3](https://github.com/user-attachments/assets/d9df750a-a2d8-4040-abef-7f3286e97d8f)
+
+### Domain Information
+
+**Find Subdomains:** https://crt.sh/
+
 
 
 
