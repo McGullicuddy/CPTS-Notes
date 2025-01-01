@@ -425,7 +425,26 @@ TXT:Verification Keys
 ```
 
 
-### Domain Information
+### Cloud Resources
 
-**Find Subdomains:** https://crt.sh/
+**Google Dorking:** intext: and inurl:
+
+**Domain Glass:** https://domain.glass/
+
+**GrayHatWarfare:** https://buckets.grayhatwarfare.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
