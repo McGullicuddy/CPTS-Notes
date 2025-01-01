@@ -377,9 +377,11 @@ sudo nmap [ip] -n -Pn -p 445 -O -S [ip] -e tun0
 
 # Module 2: Footprinting
 
+
 ### Enumeration Principles
 
 ![enum-method3](https://github.com/user-attachments/assets/d9df750a-a2d8-4040-abef-7f3286e97d8f)
+
 
 ### Domain Information
 
@@ -422,4 +424,8 @@ NS: Name Servers that are used to resolve the FQDN to IP addresses
 TXT:Verification Keys
 ```
 
+
+### Domain Information
+
+**Find Subdomains:** https://crt.sh/
 
