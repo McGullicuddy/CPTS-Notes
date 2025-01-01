@@ -385,6 +385,41 @@ sudo nmap [ip] -n -Pn -p 445 -O -S [ip] -e tun0
 
 **Find Subdomains:** https://crt.sh/
 
+**Certificate Transparancy:** RFC-6962 states that all digital certs issued by a CA must be logged as to detect false or malicious certs. Websites like the one above store this information for the public to query. Below are some commands to query domain certs. 
+```
+curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq .
+# Curl webpage and output as JSON
 
+curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
+# Curl webpage and sort by uniqure sub domains
+
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;done
+# Search file for addresses with public IPs acessible from the internet
+```
+
+**Shodan:** We can plug this new information into shodan and 
+```
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f4 >> ip-addresses.txt;done
+
+for i in $(cat ip-addresses.txt);do shodan host $i;done
+# clip host and send ips to shodan via terminal "shodan" command
+```
+
+**Dig**
+```
+dig any [domain address]
+# Interrogate DNS name servers
+```
+
+**Records**
+```
+A: Subdomains
+
+MX: Mail Server Records
+
+NS: Name Servers that are used to resolve the FQDN to IP addresses
+
+TXT:Verification Keys
+```
 
 
