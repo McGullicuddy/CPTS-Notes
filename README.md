@@ -448,7 +448,25 @@ TXT:Verification Keys
 5. anon_root=/home/username/ftp 	
 6. write_enable=YES 	Allow the usage of FTP commands: STOR, DELE, RNFR, RNTO, MKD, RMD, APPE, and SITE?
 
+**NMAP FTP Service**
+```
+# search for NSE scripts on your system
+find / -type f -name ftp* 2>/dev/null | grep scripts
 
+# Scan
+sudo nmap -sV -p21 -sC -A 10.129.14.136
+
+# Show scripts running
+sudo nmap -sV -p21 -sC -A 10.129.14.136 --script-trace
+
+# If you need to connect to ftp server without ftp
+nc -nv 10.129.14.136 21
+telnet 10.129.14.136 21
+
+#Run with openSSL if the ftp server you are connecting to is running with TLS/SSL
+openssl s_client -connect 10.129.14.136:21 -starttls ftp
+
+```
 
 
 
