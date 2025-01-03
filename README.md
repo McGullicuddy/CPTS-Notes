@@ -434,6 +434,19 @@ TXT:Verification Keys
 **GrayHatWarfare:** https://buckets.grayhatwarfare.com/
 
 
+### FTP
+
+**TFTP Commands:** connect, get, put, quit, status, verbose, debug
+
+**vsFTPd - "ftpusers":** Specifies what users are not permitted to use the FTP service 
+
+**vsFTPd Dangerous Settinga**
+1. anonymous_enable=YES 	
+2. anon_upload_enable=YES 	
+3. anon_mkdir_write_enable=YES 	
+4. no_anon_password=YES 	Do not ask anonymous for password?
+5. anon_root=/home/username/ftp 	
+6. write_enable=YES 	Allow the usage of FTP commands: STOR, DELE, RNFR, RNTO, MKD, RMD, APPE, and SITE?
 
 
 
