@@ -1,5 +1,5 @@
 # CPTS-Notes
-Notes from my CPTS "Penetration Tester" Path
+Notes from CPTS Cert
 Domain Information
 <br/><br/><br/><br/>
 
@@ -465,9 +465,10 @@ telnet 10.129.14.136 21
 
 #Run with openSSL if the ftp server you are connecting to is running with TLS/SSL
 openssl s_client -connect 10.129.14.136:21 -starttls ftp
-
 ```
 
+
+### SMB
 
 
 
