@@ -470,13 +470,50 @@ openssl s_client -connect 10.129.14.136:21 -starttls ftp
 
 ### SMB
 
+SMB handles file access across different computers. Samba allows SMB to communicate w UNIX. SMB typically operates on ports 137, 138, 139, while CIFS operates on 445. 
+NETBios was developed by IBM as an API that would lay the foundation for devices to connect and share data with eachother.
+
+**Dangerous Settings**
+1. browseable = yes 	Allow listing available shares in the current share?
+2. read only = no 	Forbid the creation and modification of files?
+3. writable = yes 	Allow users to create and modify files?
+4. guest ok = yes 	Allow connecting to the service without using a password?
+5. enable privileges = yes 	Honor privileges assigned to specific SID?
+6. create mask = 0777 	What permissions must be assigned to the newly created files?
+7. directory mask = 0777 	What permissions must be assigned to the newly created directories?
+8. logon script = script.sh 	What script needs to be executed on the user's login?
+9. magic script = script.sh 	Which script should be executed when the script gets closed?
+10. magic output = script.out 	Where the output of the magic script needs to be stored?
+
+**SMB Client Commands**
+```
+# List dirs using anon
+smbclient -N -L //10.129.14.128
 
 
+```
+
+**Scan SMB**
+```
+# Version scan and default script scan, specify ports
+sudo nmap 10.129.14.128 -sV -sC -p139,445
+```
+
+**RPC-Client**
+Nmap has trouble collecting information from SMB services so you can use tools like RPC-Client as a means of manually inspecting them. This is a tool that is designed to perfom MS-RPC functions. An RPC is a remote procedure call which is a way of. Below are a list of commands we can use to interact with the SMB service via RPCClient
+1. srvinfo -	Server information.
+2. enumdomains -	Enumerate all domains that are deployed in the network.
+3. querydominfo -	Provides domain, server, and user information of deployed domains.
+4. netshareenumall -	Enumerates all available shares.
+5. netsharegetinfo <share> - Provides information about a specific share.
+6. enumdomusers -	Enumerates all domain users.
+7. queryuser <RID> - Provides information about a specific user.
+
+**rpcclient commands**
+```
+# Brute force queryuser RIDs 0 - 4095 (0x000 - 0xFFF).
+for i in $(seq 0 1100); do rpcclient -N -U "" [ip] -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
 
 
-
-
-
-
-
+```
 
