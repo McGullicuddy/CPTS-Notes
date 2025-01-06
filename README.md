@@ -521,4 +521,52 @@ smbmap -H [ip]
 crackmapexec smb [ip] --shares -u '' -p ''
 ```
 
+### Network File System (NFS) 
+
+**NFS:** Based on Open Network Computing Remote Procedure Call (ONC-RPC/SUN-RPC) protocol exposed on TCP and UDP ports 111 and 2049
+
+**Configure NFS:** NFS can be configured at /etc/exorts. Below are the options you can use. 
+1. rw 	Read and write permissions.
+2. ro 	Read only permissions.
+3. sync 	Synchronous data transfer. (A bit slower)
+4. async 	Asynchronous data transfer. (A bit faster)
+5. secure 	Ports above 1024 will not be used.
+6. insecure 	Ports above 1024 will be used.
+7. no_subtree_check 	This option disables the checking of subdirectory trees.
+8. root_squash 	Assigns all permissions to files of root UID/GID 0 to the UID/GID of anonymous, which prevents root from accessing files on an NFS mount.
+9. nohide
+10. no_root_squash
+
+**Scan**
+```
+# Basic service enum
+sudo nmap -sV -sC [ip] -p 111,2049
+
+# rpcinfo nse script
+sudo nmap -sV --script nfs* [ip] -p 111,2049
+```
+
+**Mounting share:** Once you find a share you can mount it and view it with the following commands
+```
+# List shares you can mount
+showmount -e 10.129.14.128
+
+# Create dir and mount drive to that dir
+mkdir target-NFS
+sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
+cd target-NFS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
