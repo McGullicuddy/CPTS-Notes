@@ -514,6 +514,11 @@ Nmap has trouble collecting information from SMB services so you can use tools l
 # Brute force queryuser RIDs 0 - 4095 (0x000 - 0xFFF).
 for i in $(seq 0 1100); do rpcclient -N -U "" [ip] -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
 
+# You can also use samrdump.py for this type of information gathering
 
+#SMBmap, CrackMapExec, and enum4linux-ng are other tools to collect this same information
+smbmap -H [ip]
+crackmapexec smb [ip] --shares -u '' -p ''
 ```
+
 
