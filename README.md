@@ -557,13 +557,32 @@ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
 cd target-NFS
 ```
 
+### DNS (Domain Name System)
 
+**DNS Records:**
+1. A -	Returns an IPv4 address of the requested domain as a result.
+2. AAAA -	Returns an IPv6 address of the requested domain.
+3. MX -	Returns the responsible mail servers as a result.
+4. NS -	Returns the DNS servers (nameservers) of the domain.
+5. TXT -	This record can contain various information. The all-rounder can be used, e.g., to validate the Google Search Console or validate SSL certificates. In addition, SPF and DMARC entries are set to validate mail traffic and protect it from spam.
+6. CNAME -	This record serves as an alias for another domain name. If you want the domain www.hackthebox.eu to point to the same IP as hackthebox.eu, you would create an A record for hackthebox.eu and a
+7. CNAME - record for www.hackthebox.eu.
+8. PTR -	The PTR record works the other way around (reverse lookup). It converts IP addresses into valid domain names.
 
+**Dig:** DNS Lookup Utility
+```
+dig soa nsa.gov
+```
 
+**DNS Configuration Files**
+1. Local DNS config files
+  Under the Linux Bind9 this file is named.conf
+  
+3. Zone Files
+  
 
-
-
-
+4. Reverse Name Resolution Files 
+  
 
 
 
