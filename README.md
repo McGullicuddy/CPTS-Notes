@@ -576,10 +576,10 @@ dig soa nsa.gov
 
 **DNS Configuration Files**
 1. Local DNS config files
-  Under the Linux Bind9 this file is named.conf
+  2. Under the Linux Bind9 this file is named.conf/etc/bind/named.conf.local
   
 3. Zone Files
-  
+  Text file that describes the 
 
 4. Reverse Name Resolution Files 
   
