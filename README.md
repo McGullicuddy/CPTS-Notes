@@ -525,14 +525,14 @@ crackmapexec smb [ip] --shares -u '' -p ''
 **NFS:** Based on Open Network Computing Remote Procedure Call (ONC-RPC/SUN-RPC) protocol exposed on TCP and UDP ports 111 and 2049
 
 **Configure NFS:** NFS can be configured at /etc/exorts. Below are the options you can use. 
-1. rw 	Read and write permissions.
-2. ro 	Read only permissions.
-3. sync 	Synchronous data transfer. (A bit slower)
-4. async 	Asynchronous data transfer. (A bit faster)
-5. secure 	Ports above 1024 will not be used.
-6. insecure 	Ports above 1024 will be used.
-7. no_subtree_check 	This option disables the checking of subdirectory trees.
-8. root_squash 	Assigns all permissions to files of root UID/GID 0 to the UID/GID of anonymous, which prevents root from accessing files on an NFS mount.
+1. rw - Read and write permissions.
+2. ro - Read only permissions.
+3. sync - Synchronous data transfer. (A bit slower)
+4. async - Asynchronous data transfer. (A bit faster)
+5. secure - Ports above 1024 will not be used.
+6. insecure - Ports above 1024 will be used.
+7. no_subtree_check - This option disables the checking of subdirectory trees.
+8. root_squash 	- Assigns all permissions to files of root UID/GID 0 to the UID/GID of anonymous, which prevents root from accessing files on an NFS mount.
 9. nohide
 10. no_root_squash
 
@@ -556,32 +556,102 @@ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
 cd target-NFS
 ```
 
-### DNS (Domain Name System)
+<br> 
+
+### DNS (Domain Name System) (Port 53)
+
+<br> 
 
 **DNS Records:**
-1. A -	Returns an IPv4 address of the requested domain as a result.
-2. AAAA -	Returns an IPv6 address of the requested domain.
+1. A - Returns an IPv4 address of the requested domain as a result.
+2. AAAA - Returns an IPv6 address of the requested domain.
 3. MX -	Returns the responsible mail servers as a result.
 4. NS -	Returns the DNS servers (nameservers) of the domain.
-5. TXT -	This record can contain various information. The all-rounder can be used, e.g., to validate the Google Search Console or validate SSL certificates. In addition, SPF and DMARC entries are set to validate mail traffic and protect it from spam.
-6. CNAME -	This record serves as an alias for another domain name. If you want the domain www.hackthebox.eu to point to the same IP as hackthebox.eu, you would create an A record for hackthebox.eu and a
+5. TXT - This record can contain various information. The all-rounder can be used, e.g., to validate the Google Search Console or validate SSL certificates. In addition, SPF and DMARC entries are set to validate mail traffic and protect it from spam.
+6. CNAME - This record serves as an alias for another domain name. If you want the domain www.hackthebox.eu to point to the same IP as hackthebox.eu, you would create an A record for hackthebox.eu and a
 7. CNAME - record for www.hackthebox.eu.
-8. PTR -	The PTR record works the other way around (reverse lookup). It converts IP addresses into valid domain names.
+8. PTR - The PTR record works the other way around (reverse lookup). It converts IP addresses into valid domain names.
+9. SOA - Provides information about the corresponding DNS zone and email address of the administrative contact.
+
+<br> 
 
 **Dig:** DNS Lookup Utility
 ```
 dig soa nsa.gov
 ```
 
+<br> 
+
 **DNS Configuration Files**
 1. Local DNS config files
     1. Under the Linux Bind9 this file is named.conf/etc/bind/named.conf.local
   
 3. Zone Files
-  Text file that describes the 
+    1. Text file that describes the DNS zone with the BIND file format.
+    2. "BIND (Berkeley Internet Name Domain) is a free, open-source software package that translates domain names into IP addresses"
+    3. Must be 1 SOA record, and at least one NS record. 
 
-4. Reverse Name Resolution Files 
+5. Reverse Name Resolution Files
+    1.  Needed in order for the IP address to be resolved by the FQDN
   
+<br> 
+
+**Dangerous Settings**\
+BIND9 CVE details: https://www.cvedetails.com/product/144/ISC-Bind.html?vendor_id=64
+|Option | Description |
+| --- | --- |
+|allow-query | Defines which hosts are allowed to send requests to the DNS server | 
+|allow-recursion | Defines which hosts are allowed to send recursive requests to the DNS server | 
+|allow-transfer | Defines which hosts are allowed to receive zone transfers from the DNS server | 
+|zone-statistics | Collects statistical data of zones |
+
+
+<br> 
+
+**Footprinting DNS**
+```
+# dig to find info on DNS server, NS finds the name servers, and @ specifies the ip of the server
+dig ns [domain] @[ip]
+
+# Potential to find the DNS servers version by using the chaos or "CH" request and searching for the TXT record
+dig CH TXT [domain] [ip]
+
+# Use ANY option to view all record
+dig any [domain] [ip]
+
+# Zone transfers
+dig axfr [domain] [ip]
+```
+
+**Bruteforcing DNS**
+```
+# for subDomain in $(cat ~/secLists/Discovery/DNS/subdomains-top1million-110000.txt); do dig $sub.[domain] @[ip] | grep -v ';\|SOA' | sed -r '/^\s*$/d' | grep $sub | tee -a subdomains.txt;done
+
+# DNSenum is also an option
+dnsenum --dnsserver [ip] --enum -p 0 -s0 -o [fileName.txt] -f [secLists loction] [domain]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
