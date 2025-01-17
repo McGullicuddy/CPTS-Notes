@@ -631,24 +631,11 @@ dig axfr [domain] [ip]
 dnsenum --dnsserver [ip] --enum -p 0 -s0 -o [fileName.txt] -f [secLists loction] [domain]
 ```
 
+<br>
 
+### SMTP
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**SMTP** 
 
 
 
