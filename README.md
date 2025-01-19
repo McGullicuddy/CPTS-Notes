@@ -639,15 +639,31 @@ dnsenum --dnsserver [ip] --enum -p 0 -s0 -o [fileName.txt] -f [secLists loction]
 ```
 cat /etc/postfix/main.cf | grep -v "#" | sed -r "/^\s*$/d"
 ```
+**SMTP Commands**
+1.) AUTH PLAIN
+2.) HELO 
+3.) MAIL FROM 
+4.) RCPT TO 
+5.) DATA 
+6.) RSET 
+7.) VRFY
+8.) EXPN: Client checks if mailbox is available
+9.) NOOP 
+10.) QUIT 
+
+**Connect to SMTP Service**
+``` 
+telnet [ip] [port] 
+
+# Use VRFY to enumerate all users on service 
+VRFY root
+
+#List of all SMTP server responses 
+https://serversmtp.com/smtp-error/
 ```
+
+**Footprinting**
 ```
+#nmap - nse script is smtp-commands and smtp-open-relay
+sudo nmap [ip] -sC -sV -p 25 
 ```
-```
-
-
-
-
-
-
-
-
