@@ -640,16 +640,16 @@ dnsenum --dnsserver [ip] --enum -p 0 -s0 -o [fileName.txt] -f [secLists loction]
 cat /etc/postfix/main.cf | grep -v "#" | sed -r "/^\s*$/d"
 ```
 **SMTP Commands**
-1.) AUTH PLAIN
-2.) HELO 
-3.) MAIL FROM 
-4.) RCPT TO 
-5.) DATA 
-6.) RSET 
-7.) VRFY
-8.) EXPN: Client checks if mailbox is available
-9.) NOOP 
-10.) QUIT 
+1. AUTH PLAIN
+2. HELO 
+3. MAIL FROM 
+4. RCPT TO 
+5. DATA 
+6. RSET 
+7. VRFY
+8. EXPN: Client checks if mailbox is available
+9. NOOP 
+10. QUIT 
 
 **Connect to SMTP Service**
 ``` 
@@ -667,3 +667,43 @@ https://serversmtp.com/smtp-error/
 #nmap - nse script is smtp-commands and smtp-open-relay
 sudo nmap [ip] -sC -sV -p 25 
 ```
+
+### IMAP 143/993 &  POP3 110/995
+
+**IMAP Commands**
+1. LOGIN username password
+2. LIST "" *
+3. CREATE "INBOX"
+4. DELETE "INBOX"
+5. RENAME 
+6. LSUB
+7. SELECT INBOX / UNSELECT
+8. FETCH, CLOSE, LOGOUT
+
+**POP3 Commands**
+1. USER username
+2. PASS password
+3. STAT, LIST
+4. RETR id, DELE
+5. CAPA, RSET, QUIT
+
+**Footprinting**
+```
+sudo nmap [ip] -sV -p110,143,993,995 -sC 
+
+# If you know a users password you can curl email. Using -v can show you how the connection
+# was established and 
+curl -k https://[ip] --user user:p4ssw0rd
+
+# Use openssl to interact with the IMAP OR POP service 
+openssl s_client -connect [ip]:pop3s 
+openssl s_client -connect [ip]:IMAP
+
+
+
+```
+
+
+
+
+
