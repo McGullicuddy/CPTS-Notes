@@ -667,6 +667,7 @@ https://serversmtp.com/smtp-error/
 #nmap - nse script is smtp-commands and smtp-open-relay
 sudo nmap [ip] -sC -sV -p 25 
 ```
+<br>
 
 ### IMAP 143/993 &  POP3 110/995
 
@@ -698,12 +699,33 @@ curl -k https://[ip] --user user:p4ssw0rd
 # Use openssl to interact with the IMAP OR POP service 
 openssl s_client -connect [ip]:pop3s 
 openssl s_client -connect [ip]:IMAP
-
-
-
 ```
 
 
+### SNMP 
+
+**Default Configuration**
+```
+cat /etc/snmp/snmpd.conf | grep -v "#" | sed -r '/^\s*$/d'
+```
 
 
+**Dangerous Settings**
+1. rwuser auth 
+2. rqcommunity <community string> <ip> 
 
+**Footprinting**
+```
+# Tools: snmpwalk, onesixtyone, braa
+
+# SNMPWALK - Find OIDs 
+snmpwalk -v2c -c public [ip]
+
+# onesixtyone - find community string 
+onesixtyone -c [wordlist] [ip]
+
+# use tools such as crunch to create custom word lists 
+#Combine the found community string with BRAA to brute-force OIDs 
+braa [community string]@[ip]1.3.6.*
+
+```
