@@ -729,3 +729,27 @@ onesixtyone -c [wordlist] [ip]
 braa [community string]@[ip]1.3.6.*
 
 ```
+
+<br>
+
+### MySQL (3306)
+
+**LAMP/LEMP**: Web servers conprised of the following 
+1. Linux, Apache, MySQL, PHP
+2. Linux, Nginx, MySQL, PHP
+
+**Footprinting**
+```
+sudo nmap [ip] -sV -sC -p 3306 --script mysql*
+
+# Common MySQL Commands
+1. mysql -u [user] -p [password] -h [ip]
+2. show databases;
+3. use database;
+4. show tables; 
+5. show columns from table;
+6. select * from table 
+7. select * from table where column = "string"
+```
+
+
