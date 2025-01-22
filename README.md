@@ -751,5 +751,29 @@ sudo nmap [ip] -sV -sC -p 3306 --script mysql*
 6. select * from table 
 7. select * from table where column = "string"
 ```
+<br>
+
+### MSSQL (Microsoft SQL) (1433)
+
+**SSMS**: SQL Server Management Studio to manage MSSQL
+
+**Tools to access MSSQL databases:**
+1. mssql-cli 
+2. SQL server powershell
+3. HeidiSQL
+4. SQL Pro
+5. mssqlclient.py
+
+**Footprinting**
+```
+sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 [ip]
+
+# also you can use the Metasploit aux scanner named mssql_ping to gather some more information 
+
+# Connect to the service using the following command
+ python3 mssqlclient.py username@host -windows-auth
+```
+
+
 
 
