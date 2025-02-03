@@ -930,3 +930,26 @@ sudo evil-winrm -i [ip] -u username -p password
 # Footprinting with wmiexec.py
 ../wmiexe.py username:password@[ip] "hostname"
 ```
+
+<br>
+<br>
+
+## Information Gathering Web Edition 
+
+<br> 
+
+### Introduction 
+```
+# Collecting Information about a targets Website / Web Application 
+1. Idenfity Assest (Web Pages, Sub Domains, IPs)
+2. Hidden Information (Backup Files, Config Files, Internal Documentation)
+3. Attack Surface (Vulnerabilities)
+4. Gather Intel (Personnel, emails, behaviour)
+```
+
+<br>
+
+### WHOIS 
+```
+
+```
