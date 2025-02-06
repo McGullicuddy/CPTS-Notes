@@ -934,7 +934,7 @@ sudo evil-winrm -i [ip] -u username -p password
 <br>
 <br>
 
-## Information Gathering Web Edition 
+## Information Gathering: Web Edition 
 
 <br> 
 
@@ -951,5 +951,12 @@ sudo evil-winrm -i [ip] -u username -p password
 
 ### WHOIS 
 ```
+# Whosi is a giant database that maps domains to their owners
+# Can help to identify Personnel, Network infrastructure, and Network Changes
+# Tool like WhoisFreaks, tracks changes 
 
+# Use Cases 
+1. Look up sus email and help to determine the reputation of its sender
+2. Lookup domain of a C2 server that malware is reaching out to 
+3. Threat Intel report, gather info the target (take down history)
 ```
