@@ -960,3 +960,32 @@ sudo evil-winrm -i [ip] -u username -p password
 2. Lookup domain of a C2 server that malware is reaching out to 
 3. Threat Intel report, gather info the target (take down history)
 ```
+
+
+<br>
+
+### DNS 
+```
+# Records
+  A: Maps hostname to IPv4
+  AAAA: Maps hostname to IPv6
+  CNAME: Creates an alias for a hostname pointing to another host 
+  MX: Mail Server hostname
+  NS: Name servers hostnames 
+  TXT: Text record storing arbitrary information 
+  SOA: Administrative information 
+  SRV: Hostname and port for specific services 
+  PTR: Map ip to hostname (Reverse Lookup)
+
+  IN / CH / HS: Specifies the internet protocol being using (Internet, Chaosnet, Hesiod)
+
+# DNS Tools 
+1. dig
+2. Lookup
+3. host 
+4. dnsenum
+5. fierce 
+6. dnsrecon 
+7. theHarvester
+
+```
