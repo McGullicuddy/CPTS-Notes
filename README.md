@@ -967,13 +967,6 @@ sudo evil-winrm -i [ip] -u username -p password
 ### DNS 
 ```
 # Records
-| Record   | Description    |
-|--------------- | --------------- |
-| Item1.1   | Item2.1   |
-| Item1.2   | Item2.2   |
-| Item1.3   | Item2.3   |
-| Item1.4   | Item2.4   |
-
   A: Maps hostname to IPv4
   AAAA: Maps hostname to IPv6
   CNAME: Creates an alias for a hostname pointing to another host 
@@ -994,5 +987,6 @@ sudo evil-winrm -i [ip] -u username -p password
 5. fierce 
 6. dnsrecon 
 7. theHarvester
-
 ```
+
+
