@@ -988,5 +988,30 @@ sudo evil-winrm -i [ip] -u username -p password
 6. dnsrecon 
 7. theHarvester
 ```
+<br>
 
+### Subdomains 
+```
+# Subdomains are represented by A records
+
+# CNAME records might be used as well to create subdomain aliases
+
+# Brute Force DNS 
+1. dnsenum 
+2. fierce
+3. dnsrecon
+4. amass 
+5. assetfinder
+6. puredns 
+7. gobuster 
+8. ffuf 
+
+# Passive enumeration methods
+1. Certificate Transparancy Logs 
+2. SSL/TLS Certificates
+3. Search Engines ("site:")
+
+# dnsenum 
+dnsenum --enum [domain] -f ~/seclists/Discovery/DNS/subdomains-top1million-110000.txt -r
+```
 
