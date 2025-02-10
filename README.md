@@ -1013,5 +1013,9 @@ sudo evil-winrm -i [ip] -u username -p password
 
 # dnsenum 
 dnsenum --enum [domain] -f ~/seclists/Discovery/DNS/subdomains-top1million-110000.txt -r
+
+# Zone Transfers is a copy of a domain and its subdomains to another NS as a means of     redundancy.
+dig axfr [DNS Server] [domain]
+
 ```
 
