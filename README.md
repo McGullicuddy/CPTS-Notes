@@ -1019,3 +1019,12 @@ dig axfr [DNS Server] [domain]
 
 ```
 
+<br>
+
+### Virtual Hosts
+```
+# Discovery Tools: gobuster, feroxbuster, ffuf
+gobuster vhost -u http://[ip] -w [wlist] --append-domain
+
+# With gobuster -k will ignore ssl/tls cert errors 
+```
