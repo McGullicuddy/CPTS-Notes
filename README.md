@@ -1028,3 +1028,22 @@ gobuster vhost -u http://[ip] -w [wlist] --append-domain
 
 # With gobuster -k will ignore ssl/tls cert errors 
 ```
+
+<br>
+
+### Certificate Transparancy Logs 
+```
+# TLS/SSL are required to maintain trust across the internet. Digital certificates are need to verfiy identity. Certificate Transparancy Logs are public ledgers of these issued certificates. 
+
+# Searching CT Logs 
+  1. crt.sh
+  2. Censys 
+
+# crt.sh API using Curl
+curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
+ | select(.name_value | contains("[sub doamin]")) | .name_value' | sort -u
+```
+
+
+
+
