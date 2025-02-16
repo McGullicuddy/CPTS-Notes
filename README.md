@@ -1046,4 +1046,33 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 
 
 
+<br>
 
+### Fingerprinting 
+```
+# Gather information about the tech used to power a targets device
+
+# Fingerprinting Techniques 
+  1. Banner Grabbing
+  2. HTTP Headers 
+  3. Custom Responses 
+  4. Page Content 
+
+# Tools 
+  1. Wappanalyzer 
+  2. BuiltWith 
+  3. Whatweb 
+  4. Nmap
+  5. Netcraft 
+  6. wafw00f
+
+# Banner Grabbing 
+# I flag fetches only http headers 
+  curl -I [domain]
+
+# wafw00f
+  wafw00f [domain]
+
+# Nikto (-b is niktos software identification modules)
+  nikto -h [domain] -Tuning -b 
+```
