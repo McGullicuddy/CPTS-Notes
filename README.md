@@ -1076,3 +1076,27 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 # Nikto (-b is niktos software identification modules)
   nikto -h [domain] -Tuning -b 
 ```
+
+
+<br>
+
+### Crawling 
+```
+# Tools
+  1. Burp Spider 
+  2. ZAP
+  3. Scrapy 
+  4. Apache Nutch 
+```
+
+<br>
+
+### Automating Recon 
+```
+# Recon Frameworks 
+  1. FinalRecon: py based recon 
+  2. Recon-ng 
+  3. theHarvester 
+  4. SpiderFoot
+  5. OSINT Framework 
+```
