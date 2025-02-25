@@ -1100,3 +1100,41 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
   4. SpiderFoot
   5. OSINT Framework 
 ```
+
+<br>
+<br> 
+
+## Vulenrability Asssessment
+```
+# Goal of a Vulenrability Assessment is not to exploit a machine, but rather to identity, categorize, and document the targets vulnerabilities.
+
+# Steps 
+  1. identify all systems on the network, and categorize by assumed risk 
+  2. Scanning Policies 
+  3. Types of Scans 
+  4. Configure Scan (Hosts, Ports, protocols, noise level, time of scans, notifcations, dashboards)
+  5. Perform Scan 
+  6. Determine risks of the scan (Shouldnt this come before running the scan lol)
+  7. Decipher Scan Results
+  8. Remediation Plan 
+
+
+# Key Terms
+  1. Vulnerability: Weakness or bug on a system 
+  2. Threat: Process that amplifies the potential of an adverse event
+  3. Vulnerability + Threat = Risk 
+  4. Exploit: Resource that can be used to take advantage of an asset
+
+
+# Asset Management 
+  1. Inventory list of what you have, you cannot protect something you dont know you have
+    - All data stored on premises (HHD, SSD, etc)
+    - Remotely Stored Data (Cloud, off site servers, etc)
+    - Remote SaaS applications 
+    - Applications
+    - Local networking equipment 
+```
+
+<br>
+
+### 
