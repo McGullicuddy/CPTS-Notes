@@ -1104,7 +1104,7 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 <br>
 <br> 
 
-## Vulenrability Asssessment
+## Vulnerability Asssessment
 ```
 # Goal of a Vulenrability Assessment is not to exploit a machine, but rather to identity, categorize, and document the targets vulnerabilities.
 
