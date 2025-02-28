@@ -1145,14 +1145,27 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
   3. Qualys 
   4. OpemVAS
 
-# Output 
+# Nessu Output 
   1. Use the nessus-report-downloader to pull remote reports 
     a. https://raw.githubusercontent.com/eelsivart/nessus-report-downloader/master/nessus6-report-downloader.rb
 
-# Issues 
+# Nessus Issues 
   1. All ports open or closed: Ping remote host option 
   2. Ensure "safe checks" option is enables to avoid adverse effects 
   3. Use vnstat to monitor bandwidth before and during scan
+
+
+# OpenVAS 
+  1. Reporting Tool: https://github.com/TheGroundZero/openvasreporting
+  Command: python3 -m openvasreporting -i report-2bf466b5-627d-4659-bea6-1758b43235b1.xml -f xlsxi
+
+# Final Report should contain the following 
+  1. Executive Summary 
+  2. Overview 
+  3. Scope
+  4. Vulernabilites and Recommendations 
 ```
 
+<br>
 
+#
