@@ -1137,4 +1137,22 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 
 <br>
 
-### 
+### Vulnerability Scanning 
+```
+# Scanning Platforms 
+  1. Nessus
+  2. Nexpose 
+  3. Qualys 
+  4. OpemVAS
+
+# Output 
+  1. Use the nessus-report-downloader to pull remote reports 
+    a. https://raw.githubusercontent.com/eelsivart/nessus-report-downloader/master/nessus6-report-downloader.rb
+
+# Issues 
+  1. All ports open or closed: Ping remote host option 
+  2. Ensure "safe checks" option is enables to avoid adverse effects 
+  3. Use vnstat to monitor bandwidth before and during scan
+```
+
+
