@@ -1469,3 +1469,27 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
 
   4. If you are transferring from Windows to Windows you can use mstsc.exe
 ```
+
+<br>
+
+### Protected File Transfers 
+```
+# While transporting sensitive files across the network it would be wise to use some kind of encryptions. But someitmes you dont have that at your dispoal. 
+
+# Solutions - https://www.powershellgallery.com/packages/DRTools/4.0.3.4/Content/Functions%5CInvoke-AESEncryption.ps1
+  1. Invoke-AESEncryption.ps1
+    Invoke-AESEncryption -Mode Encrypt -Key "password" -Text "Text you want to encrypt"
+    Invoke-AESEncryption -Mode Decrypt -Key "password" -Text "Text you want to decrypt" 
+
+    Invoke-AESEncryption -Mode Encrypt -Key "password" -Path "/path/to/file.txt"
+    Invoke-AESEncryption -Mode Decrypt -Key "password" -Path "/path/to/file.txt"
+
+  2. Use aformentioned file transfer methods to move this file from host to host. And use the following command to import it.
+    Import-Module .\Invoke-AESEncryption
+
+  3. In linux we can use OpenSSL to encrypt 
+    openssl enc -aes256 -iter 100000 -pbkdf2 -in /etc/passwd -out passwd.enc
+    openssl enc -d -iter 100000 -pbkdf2 -in passwd.end -out passwd
+
+
+```
