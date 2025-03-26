@@ -133,4 +133,28 @@ linux/zarch/meterpreter_reverse_tcp
   5. Powershell - Dynamic Langugage based on the .NET Common Language Runtime
 
 
+# Payload Generation
+  1. msfvenom, msf framework 
+
+  2. Payload all the things 
+
+  3. Mythic C2 Framework 
+
+  4. Nishang 
+
+  5. Darkarmour 
+
+
+# Payload Transfer and Execution 
+  1. Impacket: Python tool used to interact directly with network protocols 
+
+  2. Payload All The Things: Useful Oneliners
+
+  3. SMB file transfer 
+
+  4. MSF 
+
+  5. ftp, tftp, http/s 
+
+
 ```
