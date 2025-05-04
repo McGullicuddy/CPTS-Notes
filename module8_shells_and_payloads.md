@@ -205,3 +205,28 @@ linux/zarch/meterpreter_reverse_tcp
     :set shell=/bin/sh
     :shell
 ```
+
+<br>
+
+### Web Shells
+```
+# Laudanum: premade web shells 
+# ASPX - Nishang: https://github.com/samratashok/nishang
+# PHP:
+    - Solid shell: https://github.com/WhiteWinterWolf/wwwolf-php-webshell
+    - Bypass file type input using Burpsuite
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
