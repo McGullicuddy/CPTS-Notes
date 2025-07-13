@@ -1,7 +1,7 @@
-
 # Getting Started
 
-### Common Tools 
+### Common Tools
+
 | L/R    | Description |
 | -------- | ------- |
 | Netcat | Banner Grabbing (netcat [ip] 22), might return the services banner and give us some information on that specific service. PowerCat is the Windows version. Also be used to transfer files. |
@@ -10,7 +10,8 @@
 
 <br>
 
-### Scanning 
+### Scanning
+
 
 **Nmap:** <br><br>
 Basic NMAP Scan
@@ -18,7 +19,7 @@ Basic NMAP Scan
 nmap [ip]
 ```
 
-You can use the **-sC** flag to tell nmap to use scripts in order to gather more information. The **-sV** flag will retrieve service versions. You can use **-p** to specify what ports you want to scan and **-p-** to scan all 65535 ports. 
+You can use the **-sC** flag to tell nmap to use scripts in order to gather more information. The **-sV** flag will retrieve service versions. You can use **-p** to specify what ports you want to scan and **-p-** to scan all 65535 ports.
 ```
 nmap -sV -sC -p- [ip]
 ```
@@ -35,7 +36,8 @@ nmap --script <script name> -p<port> <host>
 
 <br>
 
-### Banner Grabbing 
+### Banner Grabbing
+
 
 Banner Grab with Nmap
 ```
@@ -69,12 +71,13 @@ smbclient -U bob \\\\[ip]\\users
 <br>
 
 ### Web Enumeration
+
 Tools such as Gobuster and ffuf can be used to enumerate webserver directories. Gobuster can specifically be used to bruteforce DNS, vHost, and directories. \
 The following command uses the **common.txt** dictionary file to brute force a webservers common directory names.
 ```
 gobuster dir -u http://[ip]/ -w /usr/share/seclists/Discovery/Web-Content/common.txt
 ```
-You can use cURL to retrieve server header information. You can also use a tool called "EyeWitness" which can identify default creds for web apps. 
+You can use cURL to retrieve server header information. You can also use a tool called "EyeWitness" which can identify default creds for web apps.
 ```
 curl -IL https://[ip]
 ```
@@ -86,11 +89,12 @@ or
 
 whatweb --no-errors [ip]
 ```
-Viewing a websites certificates can be a good source of information. And Robots.txt can provide some valuable insight into what the owners do not want publically indexable. 
+Viewing a websites certificates can be a good source of information. And Robots.txt can provide some valuable insight into what the owners do not want publically indexable.
 
 <br>
 
-### Types of Shells 
+### Types of Shells
+
 | Type of Shell | Method of Communication |
 |---------------| -----------------------|
 |Reverse Shell 	|Connects back to our system and gives us control through a reverse connection.|
@@ -112,22 +116,26 @@ There are many ways to do this, do the research. <br>
 To elevate your tty session:
 ```
 # import /bin/bash
+
 python -c 'import pty; pty.spawn("/bin/bash")'
 
 # If python cannot be found, use Which to find where python is located
+
 which python3
 
 # Hit ctrl + z to background your session
 
 # Run the following commands to upgrade your session and then forground the session
+
 stty raw -echo
 fg
 ```
 <br>
 
 ### Priv Esc
+
 **Research Resources:**
-1. HackTricks (Checklist for Windows and Linux): https://book.hacktricks.xyz/ 
+1. HackTricks (Checklist for Windows and Linux): https://book.hacktricks.xyz/
 2. PayloadsAllTheThings: https://github.com/swisskyrepo/PayloadsAllTheThings
 3. Ennum Script: https://github.com/sleventyeleven/linuxprivchecker
 4. Suit of Enum Scripts: https://github.com/peass-ng/PEASS-ng
@@ -136,16 +144,20 @@ fg
 
 <br>
 
-### Transferring files 
-**WGET:** You can setup a python http server on the device that has the file you want to transfer, and use wget on the remote machine to pull it. 
+### Transferring files
+
+**WGET:** You can setup a python http server on the device that has the file you want to transfer, and use wget on the remote machine to pull it.
 ```
 # setup python server
+
 python3 -m http.server 8000
 
 # Use wget to pull the file
+
 wget http://[ip]:[port]/[file dir]
 
 # You can also use curl to pull the file
+
 curl http://[ip]:[port]/[file dir] -o [File name you want]
 ```
 
@@ -153,4 +165,10 @@ If you happen to obtain the ssh creds of a box, you can use SCP
 ```
 scp [file you want to transfer] user@remotehost:/tmp/linenum.sh
 ```
-**Note:** If a firewall is stopping the transfer of some files, you can try encoding the file in base64, copy and pasting it over to the remote machine, and then decoding it there. 
+**Note:** If a firewall is stopping the transfer of some files, you can try encoding the file in base64, copy and pasting it over to the remote machine, and then decoding it there.
+
+## Additional Notes & Tips
+
+- 💡 Customize your terminal prompt to include the current Git branch for convenience.
+- 📦 Keeping a VM snapshot before experiments can save time when reverting state.
+- 🛠️ Create a cheat‑sheet of common enumeration commands for quick reference.

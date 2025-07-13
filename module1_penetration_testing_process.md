@@ -1,7 +1,8 @@
-
 # Module 1: Penetration Testing Process
+
 Domain Information
-### Stages of a Penetration Test 
+### Stages of a Penetration Test
+
 | Stage    | Description |
 | -------- | ------- |
 | Pre-Engagement | The first step is to create all the necessary documents in the pre-engagement phase, discuss the assessment objectives, and clarify any questions. |
@@ -16,6 +17,7 @@ Domain Information
 <br/>
 
 ### Laws and Regulations
+
 | L/R    | Description |
 | -------- | ------- |
 |  Computer Fraud and Abuse Act (CFAA) | Federal law that makes it a criminal offense to access a computer without authorization |
@@ -28,6 +30,7 @@ Domain Information
 <br/>
 
 ### Precautionary Measure
+
 1. Obtain written consent from the owner or authorized representative of the computer or network being tested
 2. Conduct the testing within the scope of the consent obtained only and respect any limitations specified
 3. Take measures to prevent causing damage to the systems or networks being tested
@@ -35,3 +38,8 @@ Domain Information
 5. Do not intercept electronic communications without the consent of one of the parties to the communication
 6. Do not conduct testing on systems or networks that are covered by the Health Insurance Portability and Accountability Act (HIPAA) without proper authorization
 
+## Additional Notes & Tips
+
+- 💡 Remember to define clear scope and obtain written authorization before any testing.
+- 🛠️ Use tools like `scope` in Execution phase to keep track of in-bounds targets.
+- 🔍 After each engagement, hold a lessons‑learned meeting to refine methodology.
