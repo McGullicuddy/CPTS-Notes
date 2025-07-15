@@ -331,31 +331,34 @@
     9. You can still use hashes in a pass-the-hash-attack. 
     9a. evil-winrm -i ip -u username -H hash
 ```
+<br> 
+
+### Credenital Hunting in Windows 
+```
+# Just search in the windows search bar 
+
+# LaZagne 
+    1. xfreerdp or rdp over to machine
+    2. start LaZagne.exe all
+
+# findstr 
+    1. "findstr /SIM /C:"password" extentiosn of files with asterisk 
+    2. Searched for password in the root dir under files of this type
+
+# Suggestions 
+    1. Passwords in Group Policy in the SYSVOL share
+    2. Passwords in scripts in the SYSVOL share
+    3. Password in scripts on IT shares
+    4. Passwords in web.config files on dev machines and IT shares
+    5. Password in unattend.xml
+    6. Passwords in the AD user or computer description fields
+    7. KeePass databases (if we are able to guess or crack the master password)
+    8. Found on user systems and shares
+    9. Files with names like pass.txt, passwords.docx, passwords.xlsx found on user systems,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
