@@ -408,7 +408,11 @@
 - Goal: Extract and crack hashes after privilege escalation
 
 
-```
+<br>
+<br>
+<br>
+
+
 ## Main Credential Sources
 
 - **Files**: Configuration files, databases, notes, scripts, cronjobs, SSH keys
