@@ -520,8 +520,6 @@ python3 laZagne.py browsers
 - Automate with tools like LaZagne and Mimipenguin
 - Adjust methods depending on the environment
 
-```
-
 
 <br>
 <br>
