@@ -360,8 +360,122 @@
 
 ```
 
+<br>
 
+### Linux Authentication Process 
+```
+## Main Credential Sources
 
+- **Files**: Configuration files, databases, notes, scripts, cronjobs, SSH keys
+- **History Files**: Command-line history, logs
+- **Memory**: Cached credentials, running processes
+- **Keyrings**: Browser stored credentials
+
+---
+
+## Files
+
+### Configuration Files
+- Typical extensions: `.conf`, `.config`, `.cnf`
+- Enumeration Command:
+```bash
+for l in $(echo ".conf .config .cnf"); do find / -name *$l 2>/dev/null | grep -v "lib\|fonts\|share\|core"; done
+```
+- Direct grep for passwords:
+```bash
+for i in $(find / -name *.cnf 2>/dev/null | grep -v "doc\|lib"); do grep "user\|password\|pass" $i 2>/dev/null; done
+```
+
+### Database Files
+- Common extensions: `.sql`, `.db`, `.*db`, `.db*`
+```bash
+for l in $(echo ".sql .db .*db .db*"); do find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share\|man"; done
+```
+
+### Notes
+- Search within home directories:
+```bash
+find /home/* -type f -name "*.txt" -o ! -name "*.*"
+```
+
+### Scripts
+- Extensions: `.py`, `.pyc`, `.pl`, `.go`, `.jar`, `.c`, `.sh`
+```bash
+for l in $(echo ".py .pyc .pl .go .jar .c .sh"); do find / -name *$l 2>/dev/null | grep -v "doc\|lib\|headers\|share"; done
+```
+
+### Cronjobs
+- System-wide crontab:
+```bash
+cat /etc/crontab
+```
+- Cron directories:
+```bash
+ls -la /etc/cron.*/ 
+```
+
+---
+
+## History Files
+
+- Bash history and related files:
+```bash
+tail -n5 /home/*/.bash*
+```
+
+---
+
+## Logs
+
+- Review important logs:
+  - `/var/log/messages`, `/var/log/syslog`, `/var/log/auth.log`, `/var/log/secure`, `/var/log/boot.log`, `/var/log/dmesg`, `/var/log/kern.log`, `/var/log/faillog`, `/var/log/cron`, `/var/log/mail.log`, `/var/log/httpd`, `/var/log/mysqld.log`
+- Keyword grep:
+```bash
+for i in $(ls /var/log/* 2>/dev/null); do grep "accepted\|session opened\|session closed\|failure\|failed\|ssh\|password changed\|new user\|delete user\|sudo\|COMMAND=" $i 2>/dev/null; done
+```
+
+---
+
+## Memory and Cache
+
+### Mimipenguin (root access required)
+```bash
+sudo python3 mimipenguin.py
+```
+
+### LaZagne
+```bash
+sudo python2.7 laZagne.py all
+```
+
+---
+
+## Browser Credentials
+
+### Firefox
+- Check profiles:
+```bash
+ls -l .mozilla/firefox/ | grep default
+```
+- Decrypt with firefox_decrypt:
+```bash
+python3.9 firefox_decrypt.py
+```
+
+### LaZagne browser module:
+```bash
+python3 laZagne.py browsers
+```
+
+---
+
+## Summary
+
+- Enumerate files, logs, and in-memory secrets
+- Automate with tools like LaZagne and Mimipenguin
+- Adjust methods depending on the environment
+
+```
 
 
 
