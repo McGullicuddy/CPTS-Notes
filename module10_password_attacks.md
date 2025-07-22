@@ -361,8 +361,53 @@
 ```
 
 <br>
+<br>
+<br>
 
-### Linux Authentication Process 
+
+# Linux Authentication Process
+
+## Overview
+- Linux uses **Pluggable Authentication Modules (PAM)** (e.g., `pam_unix.so`) located in `/usr/lib/x86_64-linux-gnu/security/` (Debian-based).
+- Manages authentication, sessions, and password changes.
+
+## /etc/passwd
+- Stores user info, world-readable.
+- Format: `username:x:UID:GID:GECOS:/home:/shell`
+- `x` means password hash is in `/etc/shadow`.
+- Misconfigured writable `/etc/passwd` can allow root access without a password.
+
+## /etc/shadow
+- Stores password hashes, root-readable only.
+- Format includes fields: username, hash, last change, min age, max age, etc.
+- Password format: `$id$salt$hash`
+- Common ID values:
+    - 1 = MD5
+    - 2a = Blowfish
+    - 5 = SHA-256
+    - 6 = SHA-512
+    - y = Yescrypt (default on many modern systems)
+- `!` or `*` in password field = account locked.
+
+## /etc/security/opasswd
+- Stores old passwords (used by PAM to prevent reuse).
+- Root access required, useful for finding password reuse patterns.
+
+## Cracking Passwords
+- After root access:
+    ```bash
+    sudo cp /etc/passwd /tmp/
+    sudo cp /etc/shadow /tmp/
+    unshadow /tmp/passwd /tmp/shadow > /tmp/hashes
+    hashcat -m 1800 -a 0 /tmp/hashes rockyou.txt -o cracked.txt
+    ```
+- `unshadow` (John the Ripper) combines passwd + shadow for cracking.
+
+## Summary
+- Focus: `/etc/passwd`, `/etc/shadow`, `opasswd`
+- Goal: Extract and crack hashes after privilege escalation
+
+
 ```
 ## Main Credential Sources
 
@@ -478,6 +523,9 @@ python3 laZagne.py browsers
 ```
 
 
+<br>
+<br>
+<br>
 
 
 
