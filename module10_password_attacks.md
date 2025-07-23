@@ -529,6 +529,64 @@ python3 laZagne.py browsers
 <br>
 <br>
 
+# Credential Hunting in Network Traffic
+
+### Overview
+- Plaintext protocols (HTTP, FTP, SNMP, etc.) can leak credentials in network traffic.
+- Legacy systems and misconfigured services may use these insecure protocols.
+
+### Common Protocols
+
+| Protocol | Encrypted Version | Purpose |
+|-----------|------------------|---------|
+| HTTP | HTTPS | Web traffic |
+| FTP | FTPS/SFTP | File transfer |
+| SNMP | SNMPv3 | Network monitoring |
+| POP3 | POP3S | Email retrieval |
+| IMAP | IMAPS | Email access |
+| SMTP | SMTPS | Email sending |
+| LDAP | LDAPS | Directory services |
+| RDP | RDP (TLS) | Remote desktop |
+| SMB | SMB3 (TLS) | File sharing |
+| VNC | VNC (TLS/SSL) | Remote access |
+
+---
+
+### Wireshark Filters
+
+| Filter Example | Description |
+|----------------|-------------|
+| `http` | HTTP traffic |
+| `tcp.port == 80` | Filter by port |
+| `http contains "passw"` | Search for keywords |
+| `tcp.stream eq X` | Follow specific TCP stream |
+| `icmp`, `dns` | Filter ICMP/DNS traffic |
+| `ip.addr == x.x.x.x` | Filter by IP address |
+
+**Tip:** Use filters to quickly locate sensitive information in captures.
+
+---
+
+### Pcredz - Automated Credential Extraction
+
+- Tool to extract credentials from `.pcap` files or live network interfaces.
+- Detects:
+    - FTP, POP3, SMTP, IMAP logins
+    - HTTP credentials (Basic/NTLM)
+    - SNMP community strings
+    - NTLM and Kerberos hashes
+    - Credit card numbers
+
+#### Example Usage
+```bash
+./Pcredz -f capture.pcapng -t -v
+
+
+<br>
+<br>
+<br>
+
+
 
 
 
