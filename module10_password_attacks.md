@@ -580,7 +580,7 @@ python3 laZagne.py browsers
 #### Example Usage
 ```bash
 ./Pcredz -f capture.pcapng -t -v
-
+```
 
 <br>
 <br>
