@@ -589,6 +589,76 @@ python3 laZagne.py browsers
 
 
 
+# Credential Hunting Summary
+
+## 1. Credential Hunting in Network Traffic
+
+Most apps use TLS, but unencrypted protocols (e.g., HTTP, FTP, SNMP) still exist. Attackers can extract credentials in plaintext using tools like Wireshark and Pcredz.
+
+### Common Unencrypted Protocols
+| Unencrypted | Encrypted | Description |
+|-------------|-----------|-------------|
+| HTTP        | HTTPS     | Web traffic |
+| FTP         | FTPS/SFTP | File transfer |
+| SNMP        | SNMPv3    | Network device monitoring |
+| SMTP        | SMTPS     | Email sending |
+| SMB         | SMB over TLS | File sharing |
+
+### Wireshark Filters
+- `http`, `ftp`, `tcp.port == 80`
+- `http.request.method == "POST"` — often leaks creds
+- `http contains "passw"` — find passwords in payloads
+
+### Pcredz
+Extracts credentials from pcap files or live traffic. Supports HTTP, FTP, IMAP, SNMP, NTLM, Kerberos, and more.
+
+```bash
+./Pcredz -f demo.pcapng -t -v
+```
+
+---
+
+## 2. Credential Hunting in Network Shares
+
+Network shares often contain sensitive files due to poor permissions or misconfigurations.
+
+### Search Tips
+- Look for keywords: `password`, `user`, `token`
+- Target file types: `.cfg`, `.env`, `.ps1`, `.bat`
+- Prioritize IT/admin shares
+
+### Tools
+
+**Snaffler (Windows)** - Finds readable shares and scans for secrets.
+```bash
+Snaffler.exe -s
+```
+
+**PowerHuntShares (PowerShell)** - Finds share permissions and sensitive files.
+```powershell
+Invoke-HuntSMBShares -Threads 100
+```
+
+**MANSPIDER (Linux)** - Searches SMB shares for keywords.
+```bash
+docker run blacklanternsecurity/manspider <IP> -c 'passw' -u <user> -p <pass>
+```
+
+**NetExec (Linux)** - SMB spidering and keyword matching.
+```bash
+nxc smb <IP> -u <user> -p <pass> --spider IT --content --pattern "passw"
+```
+
+### Tips
+- Focus on IT shares first
+- Use keywords and file extensions
+- Validate hits — false positives are common
+
+
+<br>
+<br>
+<br>
+
 
 
 
